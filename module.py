@@ -8,12 +8,12 @@ class Module(torch.nn.Module):
         self.prompt_proj = torch.nn.Linear(1536, 128)
         self.head = head 
         self.conv = torch.nn.Sequential(
-            torch.nn.Conv2d(head, 32, kernel_size=3),
+            torch.nn.Conv2d(head, 32, kernel_size=3, padding=1), #why we need padding? alignment?
             torch.nn.ReLU(),
             torch.nn.AvgPool2d(kernel_size=2, stride=2),
-            torch.nn.Conv2d(32, 16, kernel_size=3),
+            torch.nn.Conv2d(32, 16, kernel_size=3, padding=1),
             torch.nn.ReLU(),
-            torch.nn.Conv2d(16, 20, kernel_size=3),
+            torch.nn.Conv2d(16, 20, kernel_size=3, padding=1),
         )
         self.options = torch.arange(0, 2, 0.1).cuda()
     

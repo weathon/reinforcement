@@ -33,6 +33,7 @@ optimizer = torch.optim.AdamW(module.parameters(), lr=1e-4)
 
 for epoch in range(500):
     for idx in range(len(prompts.positive_prompts)):
+        seed = idx + epoch * len(prompts.positive_prompts)
         optimizer.zero_grad()
         prompt = prompts.positive_prompts[idx]
         negative_prompt = prompts.negative_prompts[idx]
@@ -41,7 +42,8 @@ for epoch in range(500):
             negative_prompt=negative_prompt,
             num_inference_steps=16,
             guidance_scale=4,
-            module=module
+            module=module,
+            generator=torch.manual_seed(seed)
         ).images[0] 
 
         import copy 
@@ -54,7 +56,8 @@ for epoch in range(500):
             negative_prompt=negative_prompt,
             num_inference_steps=16,
             guidance_scale=4,
-            module=module
+            module=module,
+            generator=torch.manual_seed(seed + 1)
         ).images[0] 
 
         score1, score2 = ask_gpt(image1, image2, prompt, negative_prompt) 
@@ -72,13 +75,14 @@ for epoch in range(500):
         term2 = compute_term(module, intermediate_latents2, intermediate_prompt_embeds2, pred2)
 
 
-        if score1 > score2: 
-            sign = 1
-        else:
-            sign = -1
+        # if score1 > score2: 
+        #     sign = 1
+        # else:
+        #     sign = -1 
 
-        loss = - torch.log(torch.sigmoid(sign * (term1 - term2))) 
+        # loss = - torch.log(torch.sigmoid(sign * (term1 - term2))) 
+        loss = - term1 * (score1 - 15)/30 - term2 * (score2 - 15)/30
         loss.backward()
-        wandb.log({"loss": loss.item(), "reward": sign * (term1 - term2), "image": wandb.Image(Image.fromarray(np.concatenate([np.array(image1), np.array(image2)], axis=1))), "p1": np.exp(term1.item()), "p2": np.exp(term2.item()), "term1": term1.item(), "term2": term2.item()})
+        wandb.log({"loss": loss.item(), "image": wandb.Image(Image.fromarray(np.concatenate([np.array(image1), np.array(image2)], axis=1))), "p1": np.exp(term1.item()), "p2": np.exp(term2.item()), "score1": score1, "score2": score2})
         optimizer.step()
     
