@@ -75,13 +75,13 @@ for epoch in range(500):
         term2 = compute_term(module, intermediate_latents2, intermediate_prompt_embeds2, pred2)
 
 
-        # if score1 > score2: 
-        #     sign = 1
-        # else:
-        #     sign = -1 
+        if score1 > score2: 
+            sign = 1
+        else:
+            sign = -1 
 
-        # loss = - torch.log(torch.sigmoid(sign * (term1 - term2))) 
-        loss = - term1 * (score1 - 15)/30 - term2 * (score2 - 15)/30
+        loss = - torch.log(torch.sigmoid(sign * (term1 - term2))) 
+        # loss = - term1 * (score1 - 15)/30 - term2 * (score2 - 15)/30
         loss.backward()
         wandb.log({"loss": loss.item(), "image": wandb.Image(Image.fromarray(np.concatenate([np.array(image1), np.array(image2)], axis=1))), "p1": np.exp(term1.item()), "p2": np.exp(term2.item()), "score1": score1, "score2": score2})
         optimizer.step()
