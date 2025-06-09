@@ -1,0 +1,5 @@
+wandb
+__pycache__
+sweeps
+random_sweeps
+.env

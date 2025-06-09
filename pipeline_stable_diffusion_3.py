@@ -804,6 +804,7 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
         skip_layer_guidance_stop: float = 0.2,
         skip_layer_guidance_start: float = 0.01,
         mu: Optional[float] = None,
+        module = None,
     ):
         r"""
         Function invoked when calling the pipeline for generation.
@@ -1048,7 +1049,7 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
 
         self.intermediate_latents = []
         self.intermediate_prompt_embeds = []
-        
+        self.pred = []
         # 7. Denoising loop
         with self.progress_bar(total=num_inference_steps) as progress_bar:
             for i, t in enumerate(timesteps):
@@ -1069,6 +1070,13 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
                     return_dict=False,
                 )[0]
 
+                if module is not None:
+                    scale = module(self.transformer.last_hidden_state.float()[:1],
+                                   self.transformer.last_encoder_hidden_states.float()[:1])
+                    values_upsampled, values = module.map(scale)
+                    self.pred.append(values)
+                    noise_pred = noise_pred * values_upsampled.to(latents.dtype)
+                    
                 # perform guidance
                 if self.do_classifier_free_guidance:
                     noise_pred_uncond, noise_pred_text = noise_pred.chunk(2)
