@@ -1072,7 +1072,7 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
 
                 if module is not None:
                     scale = module(self.transformer.last_hidden_state.float()[:1],
-                                   self.transformer.last_encoder_hidden_states.float()[:1])
+                                   self.transformer.last_pooled_embedding.float()[:1])
                     values_upsampled, values = module.map(scale)
                     self.pred.append(values)
                     noise_pred = noise_pred * values_upsampled.to(latents.dtype)
@@ -1108,7 +1108,7 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
                 latents = self.scheduler.step(noise_pred, t, latents, return_dict=False)[0]
                 self.intermediate_latents.append(self.transformer.last_hidden_state.cpu()[0])
                 self.intermediate_prompt_embeds.append(
-                    self.transformer.last_encoder_hidden_states.cpu()[0]
+                    self.transformer.last_pooled_embedding.cpu()[0]
                 )
                 
                 if latents.dtype != latents_dtype:

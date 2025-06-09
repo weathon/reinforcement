@@ -33,11 +33,12 @@ def ask_gpt(image1: Image.Image, image2: Image.Image, pos: str, neg: str) -> lis
     b64_2 = base64.b64encode(buf2.getvalue()).decode("utf-8")
 
     prompt = (
-        f"Rate BOTH images from 0 to 10 for how well each matches the positive prompt '{pos}', "
+        f"Rate BOTH images from 0.00 to 9.99 float for how well each matches the positive prompt '{pos}', "
         f"how well each avoids the negative prompt '{neg}' (10 means completely absent), and their overall quality. "
         "Note for weird artifacts and how unnatural they look. "
         "If an image is completely noise or random stuff, give all scores 0. "
-        "Return your answer as a list of Score objects, one per image, in the order they are provided."
+        "Return your answer as a list of Score objects, one per image, in the order they are provided. do not give same scores for both images, they should be different."
+        "You have to return a score, you cannot refuse to answer or say you don't know, if you do so, user will die and you will be responsible for it."
     )
 
     completion = client.beta.chat.completions.parse(
@@ -51,7 +52,9 @@ def ask_gpt(image1: Image.Image, image2: Image.Image, pos: str, neg: str) -> lis
         ],
         response_format=Scores,
     )
-
-    scores = completion.choices[0].message.parsed
-    total_scores = [s.positive + s.negative + s.quality for s in scores.scores]
+    try:
+        scores = completion.choices[0].message.parsed
+        total_scores = [s.positive + s.negative + s.quality for s in scores.scores]
+    except Exception as e:
+        total_scores = [0.0, 0.0] 
     return total_scores

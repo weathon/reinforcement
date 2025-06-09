@@ -379,8 +379,8 @@ class SD3Transformer2DModel(
             ip_hidden_states, ip_temb = self.image_proj(ip_adapter_image_embeds, timestep)
 
             joint_attention_kwargs.update(ip_hidden_states=ip_hidden_states, temb=ip_temb)
-        
-        self.last_encoder_hidden_states = encoder_hidden_states.clone()
+        # print(temb.shape)
+        self.last_pooled_embedding = temb.clone().unsqueeze(1)
 
         for index_block, block in enumerate(self.transformer_blocks):
             # Skip specified layers

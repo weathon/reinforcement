@@ -9,8 +9,8 @@ from PIL import Image
 import wandb
 wandb.init(project="DPO")
 
-transformer = SD3Transformer2DModel.from_pretrained("stabilityai/stable-diffusion-3.5-large", torch_dtype=torch.bfloat16, subfolder="transformer")
-pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3.5-large", torch_dtype=torch.bfloat16)
+transformer = SD3Transformer2DModel.from_pretrained("stabilityai/stable-diffusion-3.5-medium", torch_dtype=torch.bfloat16, subfolder="transformer")
+pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3.5-medium", torch_dtype=torch.bfloat16)
 pipe.transformer = transformer
 pipe = pipe.to("cuda")
 
@@ -29,55 +29,56 @@ def compute_term(module, intermediate_latents, intermediate_prompt_embeds, pred)
     return term
 
 module = Module().cuda()
-optimizer = torch.optim.AdamW(module.parameters(), lr=1e-4, weight_decay=1e-2)
+optimizer = torch.optim.AdamW(module.parameters(), lr=1e-4)
+
+for epoch in range(500):
+    for idx in range(len(prompts.positive_prompts)):
+        optimizer.zero_grad()
+        prompt = prompts.positive_prompts[idx]
+        negative_prompt = prompts.negative_prompts[idx]
+        image1 = pipe(
+            prompt,
+            negative_prompt=negative_prompt,
+            num_inference_steps=16,
+            guidance_scale=4,
+            module=module
+        ).images[0] 
+
+        import copy 
+        intermediate_latents1 = copy.deepcopy(pipe.intermediate_latents)
+        intermediate_prompt_embeds1 = copy.deepcopy(pipe.intermediate_prompt_embeds)
+        pred1 = copy.deepcopy(pipe.pred)
+
+        image2 = pipe(
+            prompt,
+            negative_prompt=negative_prompt,
+            num_inference_steps=16,
+            guidance_scale=4,
+            module=module
+        ).images[0] 
+
+        score1, score2 = ask_gpt(image1, image2, prompt, negative_prompt) 
+        print(f"Scores for image1: {score1}, image2: {score2}")
+
+        intermediate_latents2 = copy.deepcopy(pipe.intermediate_latents)
+        intermediate_prompt_embeds2 = copy.deepcopy(pipe.intermediate_prompt_embeds)
+        pred2 = copy.deepcopy(pipe.pred)
 
 
-for idx in range(len(prompts.positive_prompts)):
-    prompt = prompts.positive_prompts[idx]
-    negative_prompt = prompts.negative_prompts[idx]
-    image1 = pipe(
-        prompt,
-        negative_prompt=negative_prompt,
-        num_inference_steps=28,
-        guidance_scale=4,
-        module=module
-    ).images[0] 
-
-    import copy
-    intermediate_latents1 = copy.deepcopy(pipe.intermediate_latents)
-    intermediate_prompt_embeds1 = copy.deepcopy(pipe.intermediate_prompt_embeds)
-    pred1 = copy.deepcopy(pipe.pred)
-
-    image2 = pipe(
-        prompt,
-        negative_prompt=negative_prompt,
-        num_inference_steps=28,
-        guidance_scale=4,
-        module=module
-    ).images[0] 
-
-    score1, score2 = ask_gpt(image1, image2, prompt, negative_prompt) 
+        pipe.pred[-1].shape
 
 
-    intermediate_latents2 = copy.deepcopy(pipe.intermediate_latents)
-    intermediate_prompt_embeds2 = copy.deepcopy(pipe.intermediate_prompt_embeds)
-    pred2 = copy.deepcopy(pipe.pred)
+        term1 = compute_term(module, intermediate_latents1, intermediate_prompt_embeds1, pred1)
+        term2 = compute_term(module, intermediate_latents2, intermediate_prompt_embeds2, pred2)
 
 
-    pipe.pred[-1].shape
+        if score1 > score2: 
+            sign = 1
+        else:
+            sign = -1
 
-
-    term1 = compute_term(module, intermediate_latents1, intermediate_prompt_embeds1, pred1)
-    term2 = compute_term(module, intermediate_latents2, intermediate_prompt_embeds2, pred2)
-
-
-    if score1 > score2:
-        sign = 1
-    else:
-        sign = -1
-
-    loss = - torch.log(torch.sigmoid(term1 - term2 * sign))
-    loss.backward()
-    wandb.log({"loss": loss.item(), "reward": score1 - score2, "image": wandb.Image(Image.fromarray(np.concatenate([np.array(image1), np.array(image2)], axis=1)))})
-    optimizer.step()
-    optimizer.zero_grad()
+        loss = - torch.log(torch.sigmoid(sign * (term1 - term2))) 
+        loss.backward()
+        wandb.log({"loss": loss.item(), "reward": sign * (term1 - term2), "image": wandb.Image(Image.fromarray(np.concatenate([np.array(image1), np.array(image2)], axis=1))), "p1": np.exp(term1.item()), "p2": np.exp(term2.item()), "term1": term1.item(), "term2": term2.item()})
+        optimizer.step()
+    
