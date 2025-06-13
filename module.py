@@ -42,9 +42,9 @@ class Module(torch.nn.Module):
         prompt = prompt.view(batch_size, -1, self.head, 512 // self.head)
         assert latent.shape[-2:] == prompt.shape[-2:]
         attention = torch.einsum("blhd,bnhd->bhln", latent, prompt).mean(-1) 
-        time_embed = self.time_emb(step).view(batch_size, self.head, 1, 1)
-        attention = torch.cat([attention, time_embed], dim=2)  # [BATCH, head * 2, 32, 32]
+        time_embed = self.time_emb(torch.tensor(step).cuda()).view(batch_size, self.head, 1, 1).repeat(1, 1, 32, 32)
         attention = attention.view(-1, self.head, 32, 32)
+        attention = torch.cat([attention, time_embed], dim=1)  # [BATCH, head * 2, 32, 32]
         res = self.conv(attention)
         # global avg pooling
         # res = res.mean(dim=[2, 3], keepdim=True)

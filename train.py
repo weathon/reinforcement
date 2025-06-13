@@ -24,7 +24,7 @@ def compute_term(module, intermediate_latents, intermediate_prompt_embeds, pred)
     for i in range(len(intermediate_latents)):
         latents = intermediate_latents[i].cuda().float().unsqueeze(0)
         prompt_embeds = intermediate_prompt_embeds[i].cuda().float().unsqueeze(0)
-        logistic = module(latents, prompt_embeds)
+        logistic = module(latents, prompt_embeds, i)
         prob = torch.softmax(logistic, dim=1) 
         entropy += -torch.sum(prob * torch.log(prob + 1e-10), dim=1).mean()
         prob = prob.reshape(prob.shape[1], -1) 
@@ -102,7 +102,7 @@ for epoch in range(1000):
         # loss = - torch.log(torch.sigmoid(sign * (term1 - term2)))
         policy_loss = (- term1 * (score1 - 23) / 30 - term2 * (score2 - 23) / 30) 
         entropy_loss = (- entropy1 - entropy2)
-        loss = policy_loss + entropy_loss * 2.5 
+        loss = policy_loss# + entropy_loss
         loss.backward()
         wandb.log({
             "loss": loss.item(),
