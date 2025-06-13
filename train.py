@@ -32,14 +32,14 @@ def compute_term(module, intermediate_latents, intermediate_prompt_embeds, pred)
         selected_prob = torch.gather(prob, 0, pred_.unsqueeze(0).long()).squeeze(0)
         selected_log_prob = torch.log(selected_prob + 1e-10)
         term += torch.mean(selected_log_prob)
-    return term / len(intermediate_latents), entropy / len(intermediate_latents)
+    return term, entropy
 
 module = Module().cuda()
 optimizer = torch.optim.AdamW(module.parameters(), lr=5e-5, weight_decay=1e-3)
 scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=500, eta_min=1e-6)
 
 print("len", len(prompts.negative_prompts))
-for epoch in range(500):
+for epoch in range(1000):
     for idx in tqdm.tqdm(range(len(prompts.positive_prompts))):
         seed = idx + epoch * len(prompts.positive_prompts)
         prompt = prompts.positive_prompts[idx]
@@ -94,15 +94,15 @@ for epoch in range(500):
         term1, entropy1 = compute_term(module, intermediate_latents1, intermediate_prompt_embeds1, pred1)
         term2, entropy2 = compute_term(module, intermediate_latents2, intermediate_prompt_embeds2, pred2)
 
-        if score1 > score2:
-            sign = 1
-        else:
-            sign = -1
+        # if score1 > score2:
+        #     sign = 1
+        # else:
+        #     sign = -1
 
         # loss = - torch.log(torch.sigmoid(sign * (term1 - term2)))
-        policy_loss = (- torch.exp(term1) * (score1 - 23) / 30 - torch.exp(term2) * (score2 - 23) / 30)
+        policy_loss = (- term1 * (score1 - 23) / 30 - term2 * (score2 - 23) / 30) 
         entropy_loss = (- entropy1 - entropy2)
-        loss = policy_loss + entropy_loss * 3
+        loss = policy_loss + entropy_loss * 2.5 
         loss.backward()
         wandb.log({
             "loss": loss.item(),
@@ -117,17 +117,17 @@ for epoch in range(500):
             "time_pipe2": time_pipe2,
             "time_ask": time_ask
         })
-        if (idx % (len(prompts.positive_prompts) // 2)) == (len(prompts.positive_prompts) // 2 - 1):
+        # if (idx % (len(prompts.positive_prompts) // 2)) == (len(prompts.positive_prompts) // 2 - 1):
+        if idx % 32 == 31:
             # print("updated")
             optimizer.step()
             optimizer.zero_grad()
-    scheduler.step()
     
     # Validation section: time tracing for both pipe calls and ask_gpt
     start_val_pipe1 = time.time()
     val_image1 = pipe(
-            prompts.positive_prompts[0],
-            negative_prompt=prompts.negative_prompts[0],
+            prompts.positive_prompts[8],
+            negative_prompt=prompts.negative_prompts[8],
             width=512,
             height=512,
             num_inference_steps=16,
@@ -140,8 +140,8 @@ for epoch in range(500):
 
     start_val_pipe2 = time.time()
     val_image2 = pipe(
-            prompts.positive_prompts[0],
-            negative_prompt=prompts.negative_prompts[0],
+            prompts.positive_prompts[8],
+            negative_prompt=prompts.negative_prompts[8],
             width=512,
             height=512,
             num_inference_steps=16,
@@ -153,14 +153,15 @@ for epoch in range(500):
     time_val_pipe2 = time.time() - start_val_pipe2
     
     start_val_ask = time.time()
-    score1, score2 = ask_gpt(val_image1, val_image2, prompts.positive_prompts[0], prompts.negative_prompts[0])
+    score1, score2 = ask_gpt(val_image1, val_image2, prompts.positive_prompts[8], prompts.negative_prompts[8])
     time_val_ask = time.time() - start_val_ask
     
     wandb.log({
-        "val_image": wandb.Image(Image.fromarray(np.concatenate([np.array(val_image1), np.array(val_image2)], axis=1)), caption=prompts.negative_prompts[0]),
+        "val_image": wandb.Image(Image.fromarray(np.concatenate([np.array(val_image1), np.array(val_image2)], axis=1)), caption=prompts.negative_prompts[8]),
         "val_score1": score1,
         "val_score2": score2,
         "time_val_pipe1": time_val_pipe1,
         "time_val_pipe2": time_val_pipe2,
         "time_val_ask": time_val_ask
     })
+scheduler.step()

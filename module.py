@@ -8,12 +8,15 @@ class Module(torch.nn.Module):
         self.prompt_proj = torch.nn.Linear(1536, 512) 
         self.head = head 
         self.conv = torch.nn.Sequential(
-            torch.nn.Conv2d(head, 128, kernel_size=3), #why we need padding? alignment?
+            torch.nn.Conv2d(head * 2, 128, kernel_size=3), #why we need padding? alignment?
             torch.nn.ReLU(),
             torch.nn.Conv2d(128, 64, kernel_size=3),
             torch.nn.ReLU(),
-            torch.nn.Conv2d(64, 20, kernel_size=3),
+            torch.nn.Conv2d(64, 32, kernel_size=3),
+            torch.nn.ReLU(),
+            torch.nn.Conv2d(32, 20, kernel_size=3),
         )
+        self.time_emb = torch.nn.Embedding(50, head)
         self.options = torch.arange(0, 4, 0.2).cuda()
     
     def map(self, tensor, t=3):
@@ -30,7 +33,7 @@ class Module(torch.nn.Module):
     def param_count(self):
         return sum(p.numel() for p in self.parameters() if p.requires_grad)
     
-    def forward(self, latent, prompt):
+    def forward(self, latent, prompt, step):
         # print(prompt.shape, latent.shape) 
         batch_size = latent.shape[0]
         latent = self.latent_proj(latent)
@@ -39,6 +42,8 @@ class Module(torch.nn.Module):
         prompt = prompt.view(batch_size, -1, self.head, 512 // self.head)
         assert latent.shape[-2:] == prompt.shape[-2:]
         attention = torch.einsum("blhd,bnhd->bhln", latent, prompt).mean(-1) 
+        time_embed = self.time_emb(step).view(batch_size, self.head, 1, 1)
+        attention = torch.cat([attention, time_embed], dim=2)  # [BATCH, head * 2, 32, 32]
         attention = attention.view(-1, self.head, 32, 32)
         res = self.conv(attention)
         # global avg pooling
