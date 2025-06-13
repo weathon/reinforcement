@@ -805,6 +805,7 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
         skip_layer_guidance_start: float = 0.01,
         mu: Optional[float] = None,
         module = None,
+        temp = 3
     ):
         r"""
         Function invoked when calling the pipeline for generation.
@@ -1067,20 +1068,22 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
                     encoder_hidden_states=prompt_embeds,
                     pooled_projections=pooled_prompt_embeds,
                     joint_attention_kwargs=self.joint_attention_kwargs,
-                    return_dict=False,
+                    return_dict=False, 
                 )[0]
 
                 if module is not None:
                     scale = module(self.transformer.last_hidden_state.float()[:1],
                                    self.transformer.last_pooled_embedding.float()[:1])
-                    values_upsampled, values = module.map(scale)
+                    values_upsampled, values = module.map(scale, t=temp)
                     self.pred.append(values)
-                    noise_pred = noise_pred * values_upsampled.to(latents.dtype)
+                    # noise_pred = noise_pred * values_upsampled.to(latents.dtype) thought this gonna work, forget the base
+                else:
+                    values_upsampled = 1
                     
                 # perform guidance
                 if self.do_classifier_free_guidance:
                     noise_pred_uncond, noise_pred_text = noise_pred.chunk(2)
-                    noise_pred = noise_pred_uncond + self.guidance_scale * (noise_pred_text - noise_pred_uncond)
+                    noise_pred = noise_pred_uncond + self.guidance_scale * values_upsampled * (noise_pred_text - noise_pred_uncond)
                     should_skip_layers = (
                         True
                         if i > num_inference_steps * skip_layer_guidance_start
