@@ -1096,7 +1096,7 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
                 if module is not None:
                     scale = module(self.transformer.last_hidden_state.float()[:1],
                                    self.transformer.last_pooled_embedding.float()[:1], i)
-                    values_upsampled, values = module.map(scale, t=temp * 2)
+                    values_upsampled, values = module.map(scale, t=temp)
                     self.pred.append(values)
                     # noise_pred = noise_pred * values_upsampled.to(latents.dtype) thought this gonna work, forget the base
                     values_upsampled = values_upsampled.to(latents.dtype)

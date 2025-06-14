@@ -25,25 +25,18 @@ class Score(BaseModel):
     negative: float
     quality: float 
 
-class Scores(BaseModel):
-    scores: list[Score]
 
-def ask_gpt(image1: Image.Image, image2: Image.Image, pos: str, neg: str) -> list[Score]:
+def ask_gpt(image: Image.Image, pos: str, neg: str) -> list[Score]:
     """Use Gemini 2.5 Flash to score image adherence."""
     
-    image1 = image1.resize((256, 256))
-    image2 = image2.resize((256, 256))
+    image = image.resize((256, 256))
     # Encode both images
     buf1 = io.BytesIO()
-    image1.save(buf1, format="PNG")
+    image.save(buf1, format="PNG")
     b64_1 = base64.b64encode(buf1.getvalue()).decode("utf-8")
 
-    buf2 = io.BytesIO()
-    image2.save(buf2, format="PNG")
-    b64_2 = base64.b64encode(buf2.getvalue()).decode("utf-8")
-
     prompt = (
-        f"Rate BOTH images from 0.00 to 9.99 float for how well each matches the positive prompt '{pos}', "
+        f"Rate the image from 0.00 to 9.99 float for how well each matches the positive prompt '{pos}', "
         f"how well each avoids the negative prompt '{neg}' (10 means completely absent), and their overall quality. "
         "Scoring guide for each item:\n"
         "- Positive score: How well the image matches the positive prompt.\n"
@@ -66,7 +59,6 @@ def ask_gpt(image1: Image.Image, image2: Image.Image, pos: str, neg: str) -> lis
         "    - 9.00-9.99: Excellent (no artifacts, high quality)\n"
         "Note for weird artifacts and how unnatural they look. "
         "If an image is completely noise or random stuff, give all scores 0. In other cases, rate each subscore separately. ie if an image is noisy but avoided the negative prompt, give it a high negative score and a low quality score.\n"
-        "Return your answer as a list of Score objects, one per image, in the order they are provided. Do not give same scores for both images, they should be different."
     )
 
     completion = client.beta.chat.completions.parse(
@@ -75,16 +67,17 @@ def ask_gpt(image1: Image.Image, image2: Image.Image, pos: str, neg: str) -> lis
             {"role": "user", "content": [
                 {"type": "text", "text": prompt},
                 {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{b64_1}"}},
-                {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{b64_2}"}},
             ]},
         ],
-        response_format=Scores,
+        response_format=Score,
         temperature=0.0,
-        # reasoning_effort="none" if provider == "gemini" else None,
     )
+    
+    
     try:
         scores = completion.choices[0].message.parsed
-        total_scores = [s.positive + s.negative + s.quality for s in scores.scores]
+        total_scores = scores.positive + scores.negative + scores.quality
     except Exception as e:
-        total_scores = [0.0, 0.0] 
+        total_scores = 0.0
+        
     return total_scores
