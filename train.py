@@ -21,16 +21,18 @@ pipe.set_progress_bar_config(disable=True)
 def compute_loss(module, intermediate_latents, intermediate_prompt_embeds, pred, reward):
     loss = 0
     entropy = 0
+    p = 0
     for i in range(len(intermediate_latents)):
         latents = intermediate_latents[i].cuda().float().unsqueeze(0)
         prompt_embeds = intermediate_prompt_embeds[i].cuda().float().unsqueeze(0)
         logistic = module(latents, prompt_embeds, i)
         prob = torch.softmax(logistic, dim=1) 
+        p += torch.gather(prob, 1, pred[i].cuda().long().unsqueeze(1)).squeeze(1).mean()
         entropy += -torch.sum(prob * torch.log(prob + 1e-10), dim=1).mean()
         loss += torch.nn.functional.cross_entropy(logistic, pred[i].cuda().long(), reduction='mean')
     loss = loss / len(intermediate_latents)
     entropy = entropy / len(intermediate_latents)
-    return loss * reward, entropy * 2.4
+    return loss * reward, entropy * 2.4, p / len(intermediate_latents)
 
 module = Module().cuda()
 optimizer = torch.optim.AdamW(module.parameters(), lr=1e-4, weight_decay=1e-3)
@@ -40,6 +42,7 @@ print("len", len(prompts.negative_prompts))
 losses = []
 entropies = []
 scores = []
+ps = []
 
 for epoch in range(1000):
     for idx in tqdm.tqdm(range(len(prompts.positive_prompts))):
@@ -65,12 +68,12 @@ for epoch in range(1000):
 
         score = ask_gpt(image1, prompt, negative_prompt)
         
-        loss, entropy = compute_loss(module, intermediate_latents1, intermediate_prompt_embeds1, pred1, (score-15)/30)
+        loss, entropy, p = compute_loss(module, intermediate_latents1, intermediate_prompt_embeds1, pred1, (score-15)/30)
         (loss - entropy).backward()
         losses.append(loss.item())
         entropies.append(entropy.item())
         scores.append(score)
-        
+        ps.append(p.item())
         if idx % 32 == 31 or idx == len(prompts.positive_prompts) - 1:
             optimizer.step()
             optimizer.zero_grad()
@@ -78,6 +81,7 @@ for epoch in range(1000):
                 "loss": np.mean(losses),
                 "entropy": np.mean(entropies),
                 "score": np.mean(scores),
+                "p": np.mean(ps),
             })
     
     start_val_pipe1 = time.time()
@@ -97,7 +101,7 @@ for epoch in range(1000):
     score = ask_gpt(val_image1, prompts.positive_prompts[8], prompts.negative_prompts[8])
     
     wandb.log({
-        "val_image": wandb.Image(val_image1, caption=prompts.negative_prompts[8]),
+        "val_image": wandb.Image(val_image1, caption=prompts.negative_prompts[8]),·
         "val_score": score,
     })
     scheduler.step()
