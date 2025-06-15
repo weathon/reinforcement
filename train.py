@@ -33,7 +33,7 @@ def compute_loss(module, intermediate_latents, intermediate_prompt_embeds, pred,
     return loss * reward, entropy * 2.4
 
 module = Module().cuda()
-optimizer = torch.optim.AdamW(module.parameters(), lr=1e-4, weight_decay=1e-3)
+optimizer = torch.optim.AdamW(module.parameters(), lr=1e-3, weight_decay=1e-3)
 scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=500, eta_min=1e-6)
 
 print("len", len(prompts.negative_prompts))
@@ -65,7 +65,7 @@ for epoch in range(1000):
 
         score = ask_gpt(image1, prompt, negative_prompt)
         
-        loss, entropy = compute_loss(module, intermediate_latents1, intermediate_prompt_embeds1, pred1, (score-15)/30)
+        loss, entropy = compute_loss(module, intermediate_latents1, intermediate_prompt_embeds1, pred1, (score-15)/30) #why need to be 15
         (loss - entropy).backward()
         losses.append(loss.item())
         entropies.append(entropy.item())
@@ -89,8 +89,8 @@ for epoch in range(1000):
             num_inference_steps=16,
             guidance_scale=4,
             module=module, 
-            temp=0.01,
-            generator=torch.manual_seed(1989)
+            temp=0.1,
+            generator=torch.manual_seed(64)
     ).images[0]
     time_val_pipe1 = time.time() - start_val_pipe1
 
