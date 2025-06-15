@@ -9,7 +9,7 @@ from PIL import Image
 import wandb
 import tqdm
 import time
-
+torch.manual_seed(42)
 wandb.init(project="DPO") 
 
 transformer = SD3Transformer2DModel.from_pretrained("stabilityai/stable-diffusion-3.5-medium", torch_dtype=torch.bfloat16, subfolder="transformer")
@@ -29,10 +29,10 @@ def compute_loss(module, intermediate_latents, intermediate_prompt_embeds, pred,
         prob = torch.softmax(logistic, dim=1) 
         p += torch.gather(prob, 1, pred[i].cuda().long().unsqueeze(1)).squeeze(1).mean()
         entropy += -torch.sum(prob * torch.log(prob + 1e-10), dim=1).mean()
-        loss += torch.nn.functional.cross_entropy(logistic, pred[i].cuda().long(), reduction='mean')
+        loss += torch.nn.functional.cross_entropy(logistic, pred[i].cuda().long(), reduction='mean', label_smoothing=0.3)
     loss = loss / len(intermediate_latents)
     entropy = entropy / len(intermediate_latents)
-    return loss * reward, entropy * 2.4, p / len(intermediate_latents)
+    return loss * reward, entropy * 5, p / len(intermediate_latents)
 
 module = Module().cuda()
 optimizer = torch.optim.AdamW(module.parameters(), lr=1e-4, weight_decay=1e-3)
@@ -101,7 +101,7 @@ for epoch in range(1000):
     score = ask_gpt(val_image1, prompts.positive_prompts[8], prompts.negative_prompts[8])
     
     wandb.log({
-        "val_image": wandb.Image(val_image1, caption=prompts.negative_prompts[8]),·
+        "val_image": wandb.Image(val_image1, caption=prompts.negative_prompts[8]),
         "val_score": score,
     })
     scheduler.step()
