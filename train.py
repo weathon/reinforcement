@@ -28,14 +28,19 @@ def compute_loss(module, intermediate_latents, intermediate_prompt_embeds, pred,
         prob = torch.softmax(logistic, dim=1) 
         entropy += -torch.sum(prob * torch.log(prob + 1e-10), dim=1).mean()
         loss += torch.nn.functional.cross_entropy(logistic, pred[i].cuda().long(), reduction='mean')
-        
-    return loss * reward + entropy * 0.5
+    loss = loss / len(intermediate_latents)
+    entropy = entropy / len(intermediate_latents)
+    return loss * reward, entropy * 2.4
 
 module = Module().cuda()
-optimizer = torch.optim.AdamW(module.parameters(), lr=5e-5, weight_decay=1e-3)
+optimizer = torch.optim.AdamW(module.parameters(), lr=1e-4, weight_decay=1e-3)
 scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=500, eta_min=1e-6)
 
 print("len", len(prompts.negative_prompts))
+losses = []
+entropies = []
+scores = []
+
 for epoch in range(1000):
     for idx in tqdm.tqdm(range(len(prompts.positive_prompts))):
         seed = idx + epoch * len(prompts.positive_prompts)
@@ -60,17 +65,20 @@ for epoch in range(1000):
 
         score = ask_gpt(image1, prompt, negative_prompt)
         
-        loss = compute_loss(module, intermediate_latents1, intermediate_prompt_embeds1, pred1, score-20)
-        loss.backward()
-        wandb.log({
-            "loss": loss.item(),
-            "image": wandb.Image(image1, caption=negative_prompt),
-            "score1": score,
-            "loss": loss.item(),
-        })
+        loss, entropy = compute_loss(module, intermediate_latents1, intermediate_prompt_embeds1, pred1, (score-15)/30)
+        (loss - entropy).backward()
+        losses.append(loss.item())
+        entropies.append(entropy.item())
+        scores.append(score)
+        
         if idx % 32 == 31 or idx == len(prompts.positive_prompts) - 1:
             optimizer.step()
             optimizer.zero_grad()
+            wandb.log({
+                "loss": np.mean(losses),
+                "entropy": np.mean(entropies),
+                "score": np.mean(scores),
+            })
     
     start_val_pipe1 = time.time()
     val_image1 = pipe(
@@ -92,4 +100,4 @@ for epoch in range(1000):
         "val_image": wandb.Image(val_image1, caption=prompts.negative_prompts[8]),
         "val_score": score,
     })
-scheduler.step()
+    scheduler.step()
