@@ -4,15 +4,16 @@ import base64
 import io
 from PIL import Image
 from pydantic import BaseModel
-from openai import OpenAI
-import dotenv
 
 
-provider = "clip"
-dotenv.load_dotenv()
 
 if provider == "openai":
     client = OpenAI()
+    from openai import OpenAI
+    import dotenv
+    provider = "clip"
+    dotenv.load_dotenv()
+
 elif provider == "gemini":
     client = OpenAI(
         api_key=os.getenv("GEMINI_API_KEY"),
