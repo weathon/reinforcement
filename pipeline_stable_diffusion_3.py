@@ -1050,7 +1050,7 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
 
         self.intermediate_latents = []
         self.intermediate_prompt_embeds = []
-        # self.pred = []
+        self.pred = []
 
         # (
         #     uncond_embed,
@@ -1098,7 +1098,7 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
                                    self.transformer.last_pooled_embedding.float()[:1], i)
                     values_upsampled, values = module.map(scale)
                     self.pred.append(values)
-                    # noise_pred = noise_pred * values_upsampled.to(latents.dtype) thought this gonna work, forget the base
+                    # noise_pred = noise_pred * valuesupsampled.to(latents.dtype) thought this gonna work, forget the base
                     values_upsampled = values_upsampled.to(latents.dtype)
                 else:
                     values_upsampled = 1
