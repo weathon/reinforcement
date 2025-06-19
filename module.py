@@ -17,7 +17,7 @@ class Module(torch.nn.Module):
             torch.nn.Conv2d(32, 40, kernel_size=3),
         )
         self.time_emb = torch.nn.Embedding(50, head)
-        self.options = torch.arange(0, 8, 0.2).cuda()
+        self.options = torch.arange(0, 2, 0.1).cuda()
     
     def map(self, tensor):
         # tensor [BATCH, options, 32, 32]
