@@ -93,17 +93,19 @@ def ask_gpt(image: Image.Image, pos: str, neg: str) -> list[Score]:
     return total_scores
 
 def ask_clip(image: Image.Image, pos: str, neg: str) -> list[Score]:
-        text = [pos, "there is a " + neg + "in the image"]
-        inputs = processor(text=text, images=[image.convert('RGB')], return_tensors="pt", padding="longest").to("cuda")
-        logits = model(**inputs).logits_per_image[0]
-        itc_scores = torch.nn.functional.softmax(logits, dim=-1)[0].item()
-        
-        prompt = pos
-        img = [image.convert('RGB')]
+    text = [pos, "there is " + neg + "in the image"] 
+    inputs = processor(text=text, images=[image.convert('RGB')], return_tensors="pt", padding="longest").to("cuda")
+    logits = model(**inputs).logits_per_image[0]
+    logits[1] *= 3
+    itc_scores = torch.nn.functional.softmax(logits, dim=-1)[0].item()
+    
+    prompt = pos
+    img = [image.convert('RGB')]
 
-        with torch.no_grad():
-            rewards = reward_model.score(prompt, img)
-        return itc_scores * 2 + torch.sigmoid(torch.tensor(rewards))
+    with torch.no_grad():
+        rewards = reward_model.score(prompt, img)
+    return itc_scores + torch.sigmoid(torch.tensor(rewards))
+
     
 if provider == "clip":
     eval = ask_clip 
