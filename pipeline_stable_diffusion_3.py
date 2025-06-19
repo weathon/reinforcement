@@ -1052,25 +1052,25 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
         self.intermediate_prompt_embeds = []
         self.pred = []
 
-        # (
-        #     uncond_embed,
-        #     _,
-        #     pooled_uncon_embed,
-        #     _,
-        # ) = self.encode_prompt(
-        #     prompt="",
-        #     prompt_2="",
-        #     prompt_3="",
-        #     negative_prompt="",
-        #     negative_prompt_2="",
-        #     negative_prompt_3="",
-        #     do_classifier_free_guidance=False,
-        #     device=device,
-        #     clip_skip=self.clip_skip,
-        #     num_images_per_prompt=num_images_per_prompt,
-        #     max_sequence_length=max_sequence_length,
-        #     lora_scale=lora_scale,
-        # )
+        (
+            uncond_embed,
+            _,
+            pooled_uncon_embed,
+            _,
+        ) = self.encode_prompt(
+            prompt="",
+            prompt_2="",
+            prompt_3="",
+            negative_prompt="",
+            negative_prompt_2="",
+            negative_prompt_3="",
+            do_classifier_free_guidance=False,
+            device=device,
+            clip_skip=self.clip_skip,
+            num_images_per_prompt=num_images_per_prompt,
+            max_sequence_length=max_sequence_length,
+            lora_scale=lora_scale,
+        )
             
         # 7. Denoising loop
         with self.progress_bar(total=num_inference_steps) as progress_bar:
@@ -1104,23 +1104,23 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
                     values_upsampled = 1
 
                 # this has to be after getting the scale
-                # uncon_noise_pred = self.transformer(
-                #     hidden_states=latent_model_input[0:1],
-                #     timestep=timestep[0:1],
-                #     encoder_hidden_states=uncond_embed,
-                #     pooled_projections=pooled_uncon_embed,
-                #     joint_attention_kwargs=self.joint_attention_kwargs,
-                #     return_dict=False,
-                # )[0]
+                uncon_noise_pred = self.transformer(
+                    hidden_states=latent_model_input[0:1],
+                    timestep=timestep[0:1],
+                    encoder_hidden_states=uncond_embed,
+                    pooled_projections=pooled_uncon_embed,
+                    joint_attention_kwargs=self.joint_attention_kwargs,
+                    return_dict=False,
+                )[0]
                 
                 tau = 2.5
                 # perform guidance
                 if self.do_classifier_free_guidance:
                     noise_pred_neg, noise_pred_text = noise_pred.chunk(2)
                     norm_positive = torch.norm(noise_pred_text, p=1, dim=1)
-                    # noise_pred = uncon_noise_pred + self.guidance_scale * (noise_pred_text - uncon_noise_pred) \
-                    #                               - self.guidance_scale * values_upsampled * (noise_pred_neg - uncon_noise_pred)
-                    noise_pred = (self.guidance_scale + 1) * (1 - values_upsampled + 1) * noise_pred_text - self.guidance_scale * values_upsampled * noise_pred_neg
+                    noise_pred = uncon_noise_pred + self.guidance_scale * (noise_pred_text - uncon_noise_pred) \
+                                                  - self.guidance_scale * values_upsampled * (noise_pred_neg - uncon_noise_pred)
+                    # noise_pred = (self.guidance_scale + 1) * (1 - (values_upsampled - 1)) * noise_pred_text - self.guidance_scale * values_upsampled * noise_pred_neg
                     norm_pred = torch.norm(noise_pred, p=1, dim=1)
                     ratio = norm_pred / norm_positive
                     noise_pred = torch.where(ratio > tau, tau, ratio) / ratio * noise_pred
