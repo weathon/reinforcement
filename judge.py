@@ -96,7 +96,7 @@ def ask_clip(image: Image.Image, pos: str, neg: str) -> list[Score]:
     text = [pos, "there is " + neg + "in the image"] 
     inputs = processor(text=text, images=[image.convert('RGB')], return_tensors="pt", padding="longest").to("cuda")
     logits = model(**inputs).logits_per_image[0]
-    logits[1] *= 3
+    logits[1] *= 1.5
     itc_scores = torch.nn.functional.softmax(logits, dim=-1)[0].item()
     
     prompt = pos
