@@ -7,11 +7,11 @@ from pydantic import BaseModel
 
 
 
+provider = "clip"
 if provider == "openai":
     client = OpenAI()
     from openai import OpenAI
     import dotenv
-    provider = "clip"
     dotenv.load_dotenv()
 
 elif provider == "gemini":
