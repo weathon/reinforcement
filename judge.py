@@ -7,7 +7,8 @@ from pydantic import BaseModel
 from openai import OpenAI
 import dotenv
 
-provider = "openai"
+
+provider = "clip"
 dotenv.load_dotenv()
 
 if provider == "openai":
@@ -17,8 +18,16 @@ elif provider == "gemini":
         api_key=os.getenv("GEMINI_API_KEY"),
         base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
     )
-else:
-    raise ValueError("Unsupported provider. Use 'openai' or 'gemini'.")
+elif provider == "clip":
+    from transformers import CLIPProcessor, CLIPModel
+    import torch
+    import ImageReward as reward
+    
+    processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+    model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32", torch_dtype=torch.float16).to("cuda")
+    reward_model = reward.load("ImageReward-v1.0")
+
+
 
 class Score(BaseModel):
     positive: float
@@ -81,3 +90,21 @@ def ask_gpt(image: Image.Image, pos: str, neg: str) -> list[Score]:
         total_scores = 0.0
         
     return total_scores
+
+def ask_clip(image: Image.Image, pos: str, neg: str) -> list[Score]:
+        text = [pos, "there is a " + neg + "in the image"]
+        inputs = processor(text=text, images=[image.convert('RGB')], return_tensors="pt", padding="longest").to("cuda")
+        logits = model(**inputs).logits_per_image[0]
+        itc_scores = torch.nn.functional.softmax(logits, dim=-1)[0].item()
+        
+        prompt = pos
+        img = [image.convert('RGB')]
+
+        with torch.no_grad():
+            rewards = reward_model.score(prompt, img)
+        return itc_scores * 2 + torch.sigmoid(torch.tensor(rewards))
+    
+if provider == "clip":
+    eval = ask_clip 
+else:
+    eval = ask_gpt

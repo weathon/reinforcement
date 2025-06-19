@@ -3,17 +3,16 @@ from pipeline_stable_diffusion_3 import StableDiffusion3Pipeline
 from transformer_sd3 import SD3Transformer2DModel
 from module import Module
 import prompts
-from judge import ask_gpt 
+from judge import eval 
 import numpy as np
 from PIL import Image
 import wandb
 import tqdm
 import time
-torch.manual_seed(42)
 wandb.init(project="DPO") 
 
-transformer = SD3Transformer2DModel.from_pretrained("stabilityai/stable-diffusion-3.5-medium", torch_dtype=torch.bfloat16, subfolder="transformer")
-pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3.5-medium", torch_dtype=torch.bfloat16)
+transformer = SD3Transformer2DModel.from_pretrained("stabilityai/stable-diffusion-3.5-large", torch_dtype=torch.bfloat16, subfolder="transformer")
+pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3.5-large", torch_dtype=torch.bfloat16)
 pipe.transformer = transformer
 pipe = pipe.to("cuda")
 pipe.set_progress_bar_config(disable=True)
@@ -26,25 +25,27 @@ def compute_loss(module, intermediate_latents, intermediate_prompt_embeds, pred,
         latents = intermediate_latents[i].cuda().float().unsqueeze(0)
         prompt_embeds = intermediate_prompt_embeds[i].cuda().float().unsqueeze(0)
         logistic = module(latents, prompt_embeds, i)
-        prob = torch.softmax(logistic, dim=1) 
+        prob = torch.softmax(logistic, dim=1)
         p += torch.gather(prob, 1, pred[i].cuda().long().unsqueeze(1)).squeeze(1).mean()
+        # p += torch.max(prob, dim=1).values.mean()
         entropy += -torch.sum(prob * torch.log(prob + 1e-10), dim=1).mean()
-        loss += torch.nn.functional.cross_entropy(logistic, pred[i].cuda().long(), reduction='mean', label_smoothing=0.3)
+        loss += torch.nn.functional.cross_entropy(logistic, pred[i].cuda().long(), reduction='mean', label_smoothing=0.01 if reward > 0 else 0.0)
     loss = loss / len(intermediate_latents)
     entropy = entropy / len(intermediate_latents)
-    return loss * reward, entropy * 5, p / len(intermediate_latents)
+    return loss * reward, entropy * 0, p / len(intermediate_latents)
 
 module = Module().cuda()
 optimizer = torch.optim.AdamW(module.parameters(), lr=1e-4, weight_decay=1e-3)
 scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=500, eta_min=1e-6)
 
 print("len", len(prompts.negative_prompts))
-losses = []
+losses = [] 
 entropies = []
 scores = []
 ps = []
+baseline = None
 
-for epoch in range(1000):
+for epoch in range(500):
     for idx in tqdm.tqdm(range(len(prompts.positive_prompts))):
         seed = idx + epoch * len(prompts.positive_prompts)
         prompt = prompts.positive_prompts[idx]
@@ -66,23 +67,36 @@ for epoch in range(1000):
         intermediate_prompt_embeds1 = [i.clone() for i in pipe.intermediate_prompt_embeds]
         pred1 = [i.clone() for i in pipe.pred]
 
-        score = ask_gpt(image1, prompt, negative_prompt)
+        score = eval(image1, prompt, negative_prompt)
         
-        loss, entropy, p = compute_loss(module, intermediate_latents1, intermediate_prompt_embeds1, pred1, (score-15)/30)
+        loss, entropy, p = compute_loss(module, intermediate_latents1, intermediate_prompt_embeds1, pred1, score - baseline if baseline is not None else 0)
         (loss - entropy).backward()
+        # loss.backward()
+        if baseline is None:
+            baseline = score
+        else:
+            baseline = 0.95 * baseline + 0.05 * score
         losses.append(loss.item())
         entropies.append(entropy.item())
         scores.append(score)
         ps.append(p.item())
-        if idx % 32 == 31 or idx == len(prompts.positive_prompts) - 1:
+        
+        if (idx + 1) % 4 == 0: 
             optimizer.step()
             optimizer.zero_grad()
-            wandb.log({
-                "loss": np.mean(losses),
-                "entropy": np.mean(entropies),
-                "score": np.mean(scores),
-                "p": np.mean(ps),
-            })
+        
+    wandb.log({
+        "loss": np.mean(losses),
+        "entropy": np.mean(entropies),
+        "score": np.mean(scores),
+        "p": np.mean(ps),
+        "baseline": baseline,
+    })
+    losses = []
+    entropies = []
+    scores = []
+    ps = []
+            
     
     start_val_pipe1 = time.time()
     val_image1 = pipe(
@@ -98,7 +112,7 @@ for epoch in range(1000):
     ).images[0]
     time_val_pipe1 = time.time() - start_val_pipe1
 
-    score = ask_gpt(val_image1, prompts.positive_prompts[8], prompts.negative_prompts[8])
+    score = eval(val_image1, prompts.positive_prompts[8], prompts.negative_prompts[8])
     
     wandb.log({
         "val_image": wandb.Image(val_image1, caption=prompts.negative_prompts[8]),

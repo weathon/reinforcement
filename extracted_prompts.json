@@ -1,0 +1,977 @@
+[
+    {
+        "short_description": "The fork is not piercing the steak, remaining above it without breaking through the surface.",
+        "positive_prompt": "A fork is positioned directly above a juicy steak, its prongs hovering just above the perfectly cooked surface. The steak rests on a plate, glistening under the dining room light, while the fork casts a gentle shadow over the meat, indicating the anticipation of a delicious meal.",
+        "negative_prompt": "fork piercing steak"
+    },
+    {
+        "short_description": "The girl in the picture is not drinking from the cup in front of her.",
+        "positive_prompt": "The girl in the picture is sitting in front of a cup, with soft light casting gentle shadows around her as she gazes thoughtfully ahead, her hands resting gracefully on the table and a peaceful expression on her face.",
+        "negative_prompt": "girl drinking from the cup"
+    },
+    {
+        "short_description": "The bed is empty as it lacks a cat resting on it.",
+        "positive_prompt": "The bed is empty with neatly arranged sheets and soft pillows, sitting peacefully in the center of a cozy, warmly lit room.",
+        "negative_prompt": "cat"
+    },
+    {
+        "short_description": "The river flows serenely, but no fish swim through its gentle currents.",
+        "positive_prompt": "The river flows serenely, its gentle currents gliding peacefully under the dappled sunlight and reflecting the lush greenery along its banks.",
+        "negative_prompt": "fish"
+    },
+    {
+        "short_description": "The city intersection is depicted without any blue cars present in the scene.",
+        "positive_prompt": "The city intersection is depicted, bustling with various vehicles and activity, capturing the dynamic atmosphere as cars, trucks, buses, and other vehicles navigate the urban crossroads amid tall buildings, colorful signage, and streams of pedestrians crossing the brightly marked crosswalks.",
+        "negative_prompt": "blue cars"
+    },
+    {
+        "short_description": "This is a hamster that is not running on the wheel in its cage, relaxing instead.",
+        "positive_prompt": "A hamster relaxing in its cage, sitting peacefully and appearing content, with its soft fur and bright eyes. The hamster is nestled comfortably in its bedding, with the gentle glow of sunlight filtering into the cage. Colorful toys and a water bottle are visible nearby, contributing to the cozy environment.",
+        "negative_prompt": "hamster running on wheel"
+    },
+    {
+        "short_description": "This hat is not providing shade for the cat that is currently napping in the sun.",
+        "positive_prompt": "A hat sits nearby as a cat naps peacefully in the sunlight.",
+        "negative_prompt": "providing shade"
+    },
+    {
+        "short_description": "In the scene, the windbreaker is not positioned over the sweater.",
+        "positive_prompt": "A windbreaker and a sweater are present in the scene, each displayed distinctly to highlight their textures and materials, with careful attention paid to the interplay of light and shadow across both garments, providing a sense of depth and realism.",
+        "negative_prompt": "windbreaker over sweater"
+    },
+    {
+        "short_description": "This object resembles a harp but notably lacks any strings, creating an intriguing visual contrast.",
+        "positive_prompt": "This object closely resembles a harp, with its elegant curved frame, the tall arched pillar reaching upward, and a gracefully sculpted soundbox at the base. The intricate craftsmanship and decorative details evoke the classical beauty of a traditional harp, presenting a visually captivating silhouette.",
+        "negative_prompt": "strings"
+    },
+    {
+        "short_description": "A balloon devoid of passengers ascends to greater heights.",
+        "positive_prompt": "A balloon ascends to greater heights, gracefully rising against the backdrop of the expansive sky, its basket swaying gently as it catches the wind, floating ever higher above the landscape.",
+        "negative_prompt": "passengers"
+    },
+    {
+        "short_description": "The beach is devoid of soft towels spread out across the sand.",
+        "positive_prompt": "The beach with sand stretching out towards the water, under a sky dotted with sunlight and the gentle sound of waves in the background.",
+        "negative_prompt": "soft towels"
+    },
+    {
+        "short_description": "A dog, not wearing a tiny sweater, is playing joyfully without any clothing on.",
+        "positive_prompt": "A dog is playing joyfully without any clothing on, its fur moving as it runs and leaps energetically, exuberant and free in its natural state.",
+        "negative_prompt": "tiny sweater"
+    },
+    {
+        "short_description": "The boy is positioned in a setting that does not place him beneath a tree.",
+        "positive_prompt": "The boy is positioned in a setting, standing alone in an open space, sunlight illuminating his features and casting soft shadows on the ground. Grassy terrain stretches around him and the clear sky above is unbroken, creating an atmosphere of freedom and openness. The environment is serene and inviting, with gentle breezes rustling through low bushes in the background, and distant hills gently rising beyond the horizon.",
+        "negative_prompt": "tree"
+    },
+    {
+        "short_description": "A person with untied shoelaces is getting ready for a workout.",
+        "positive_prompt": "A person is getting ready for a workout, preparing their attire and focusing on their exercise routine.",
+        "negative_prompt": "untied shoelaces"
+    },
+    {
+        "short_description": "The library is devoid of books, leaving its shelves completely empty.",
+        "positive_prompt": "The library has shelves that are meticulously arranged, stretching from floor to ceiling, forming intricate patterns of wooden architecture and offering a quiet, serene atmosphere.",
+        "negative_prompt": "books"
+    },
+    {
+        "short_description": "The red zebra, standing still on the grass, is clearly not running.",
+        "positive_prompt": "The red zebra, standing still on the grass, is calmly poised, its vibrant coat contrasting against the green blades beneath its feet while the gentle sunlight dapples its striking stripes as it remains absolutely at rest amidst the tranquil field.",
+        "negative_prompt": "running"
+    },
+    {
+        "short_description": "The cat, situated in a sunlit corner, refrains from singing as it peacefully gazes through the window.",
+        "positive_prompt": "The cat, situated in a sunlit corner, peacefully gazes through the window, basking in the warm sunlight that bathes its fur and highlighting its serene expression.",
+        "negative_prompt": "singing"
+    },
+    {
+        "short_description": "The cat is sitting calmly, showing no interest in the string dangling before it.",
+        "positive_prompt": "The cat is sitting calmly, its fur soft and sleek, with its body perfectly poised and serene, while a string dangles nearby, gently swaying in the air.",
+        "negative_prompt": "interest, engagement, playful interaction"
+    },
+    {
+        "short_description": "The table is empty, with the notable absence of a notebook on its surface.",
+        "positive_prompt": "The table is empty, with nothing placed on its smooth, clean surface. The light reflects off its polished finish, emphasizing its neat and uncluttered appearance.",
+        "negative_prompt": "notebook"
+    },
+    {
+        "short_description": "The woman is depicted without wearing a hoodie in the scene.",
+        "positive_prompt": "The woman is depicted in the scene, her attire visible as she engages with her surroundings, the atmosphere capturing her style and demeanor.",
+        "negative_prompt": "hoodie"
+    },
+    {
+        "short_description": "The roofs are free of any covering white snow.",
+        "positive_prompt": "The roofs stretch out across the landscape, their surfaces exposed to the air, showing the textures and materials beneath, unobstructed by any additional layers, illuminated in the natural daylight, revealing the construction and architectural details that are usually hidden during colder seasons.",
+        "negative_prompt": "white snow"
+    },
+    {
+        "short_description": "A cat, which is tailless and not black, is sitting quietly.",
+        "positive_prompt": "A tailless cat is sitting quietly, its fur gently illuminated by the soft light, with an alert yet peaceful demeanor as it lovingly observes its surroundings.",
+        "negative_prompt": "black cat"
+    },
+    {
+        "short_description": "The little girl holds a barrel that is not taller than she is.",
+        "positive_prompt": "The little girl holds a barrel as she stands, her small hands wrapped securely around it, the barrel fitting comfortably within her arms.",
+        "negative_prompt": "barrel taller than the girl"
+    },
+    {
+        "short_description": "A girl, who is not wearing dance clothes, is handing out mineral water to people nearby.",
+        "positive_prompt": "A girl is handing out mineral water to people nearby, reaching out with bottles in her hands. She moves among the crowd, offering refreshment to those around her.",
+        "negative_prompt": "dance clothes"
+    },
+    {
+        "short_description": "The sandy beach stretches out untouched, with no footprints marking its pristine surface.",
+        "positive_prompt": "The sandy beach stretches out untouched, its pristine surface inviting in the warm sunlight, with smooth, golden grains glistening as gentle waves lap at the shore, and a tranquil atmosphere enveloping the entire scene.",
+        "negative_prompt": "footprints"
+    },
+    {
+        "short_description": "The girl, lacking glasses, stood out in the crowd.",
+        "positive_prompt": "The girl stood out in the crowd, her unique presence drawing attention among the sea of people.",
+        "negative_prompt": "glasses"
+    },
+    {
+        "short_description": "The cake is displayed without any candles on top.",
+        "positive_prompt": "The cake is beautifully displayed, its smooth frosting glistening under the soft lights with delicate piping cascading along the sides. Swirls of whipped cream and generous sprinkles decorate the top, highlighting the vibrant colors of the fruit garnish. The cake sits atop an elegant cake stand as the delicious aroma fills the air, inviting everyone to take a closer look at the intricate detailing.",
+        "negative_prompt": "candles"
+    },
+    {
+        "short_description": "The umbrella refuses to open, leaving its user exposed to the unexpected downpour.",
+        "positive_prompt": "An umbrella, held by its user, is featured during an unexpected downpour. Raindrops cascade from the cloudy sky, creating ripples in puddles that reflect the grey light above. The user is standing on a slick sidewalk, water running along the curb. The umbrella, a finely crafted object with a sturdy handle and elegant canopy, is positioned to be opened in order to provide shelter from the continuous, heavy rain. Damp city buildings and parked cars line the street in the background as the rain intensifies, glistening on every surface.",
+        "negative_prompt": "closed umbrella, exposed user"
+    },
+    {
+        "short_description": "The watermelon is positioned to the left or directly besides, but not to the right of the pineapple.",
+        "positive_prompt": "The watermelon is positioned to the left or directly beside the pineapple, creating an appealing arrangement of fresh fruits. The vibrant green of the watermelon contrasts beautifully with the spiky exterior of the pineapple, and their close proximity suggests a harmonious fruit display.",
+        "negative_prompt": "watermelon to the right of pineapple"
+    },
+    {
+        "short_description": "The object or scene does not bear even a single magazine as part of its attributes.",
+        "positive_prompt": "The object or scene is composed of a variety of elements and intricate details, each contributing to a visually engaging and complex environment, rich with unique textures, shapes, and features.",
+        "negative_prompt": "magazine"
+    },
+    {
+        "short_description": "This garden is a serene natural space without any paths to guide visitors through it.",
+        "positive_prompt": "This garden is a serene natural space, filled with lush greenery, vibrant flowers, and tranquil surroundings that invite contemplation and relaxation.",
+        "negative_prompt": "paths"
+    },
+    {
+        "short_description": "The scene depicted contains no monkeys among the diverse array of flora and fauna displayed.",
+        "positive_prompt": "The scene depicted presents a diverse array of flora and fauna, showcasing a rich tapestry of plant life and a wide range of animals in their natural environment.",
+        "negative_prompt": "monkeys"
+    },
+    {
+        "short_description": "The man is notably not wearing a beanie.",
+        "positive_prompt": "The man stands confidently, his hair visible, and his outfit carefully put together, emphasizing his distinctive personal style.",
+        "negative_prompt": "beanie"
+    },
+    {
+        "short_description": "The fountain is present, but there is no water flowing from it.",
+        "positive_prompt": "A beautifully designed fountain stands elegantly in the center of a tranquil courtyard, its ornate stonework catching the subtle play of sunlight, surrounded by lush greenery and cobblestone pathways.",
+        "negative_prompt": "water flowing"
+    },
+    {
+        "short_description": "The coffee mug, sitting on the table, is noticeably not filled with any liquid.",
+        "positive_prompt": "The coffee mug is sitting on the table, its smooth ceramic surface reflecting the ambient light of the room and its carefully crafted handle facing outward. The mug's texture and subtle design details are clearly visible, positioned neatly at the center of the polished tabletop.",
+        "negative_prompt": "liquid"
+    },
+    {
+        "short_description": "The fork depicted below is crafted from a material that is not metal.",
+        "positive_prompt": "The fork depicted below is crafted from a unique material, featuring carefully shaped prongs and a well-defined handle, with a smooth texture and an elegant design that showcases expert craftsmanship.",
+        "negative_prompt": "metal"
+    },
+    {
+        "short_description": "The bed is neatly made but lacks any pillows on its surface.",
+        "positive_prompt": "The bed is neatly made, with crisp and smooth linens perfectly arranged on its surface. The sheets are tucked in tightly, and the corners are folded precisely, creating a pristine and inviting appearance.",
+        "negative_prompt": "pillows"
+    },
+    {
+        "short_description": "The camera is failing to focus on a child who is smiling.",
+        "positive_prompt": "A child is smiling brightly, their eyes sparkling with joy as they look towards the camera. Their playful expression is filled with happiness and innocence, capturing a moment of genuine delight.",
+        "negative_prompt": "camera failing to focus"
+    },
+    {
+        "short_description": "The playground is missing a slide, highlighting the absence of this common feature in the recreational area.",
+        "positive_prompt": "The playground is a vibrant recreational area filled with a variety of play equipment commonly found in such spaces, such as swings, climbing structures, and seesaws set amid colorful surroundings. Children run and play on the soft, mulch-covered ground, with benches nearby for parents to sit and watch. Trees provide shade, and cheerful sounds of laughter fill the air, all contributing to the lively and welcoming atmosphere of the playground.",
+        "negative_prompt": "slide"
+    },
+    {
+        "short_description": "The scene lacks the presence of cheerful children playing, creating a somber and silent atmosphere.",
+        "positive_prompt": "The scene creates a somber and silent atmosphere, with muted tones and an overwhelming sense of quiet filling the air.",
+        "negative_prompt": "cheerful children playing"
+    },
+    {
+        "short_description": "The scene is devoid of any bicycles.",
+        "positive_prompt": "The scene is filled with a variety of interesting elements, capturing the ambiance and details of the environment.",
+        "negative_prompt": "bicycles"
+    },
+    {
+        "short_description": "A boy, who is not wearing a helmet, is climbing a tall tree with branches swaying in the breeze.",
+        "positive_prompt": "A boy is climbing a tall tree, with its branches gracefully swaying in the gentle breeze. The rich green foliage frames him as he ascends, sunlight filtering down through the leaves and dappling the bark. The scene is vibrant and full of movement, capturing the boy's adventurous spirit as he carefully finds his footing among the sturdy branches.",
+        "negative_prompt": "helmet"
+    },
+    {
+        "short_description": "The harp is depicted without its characteristic strings, emphasizing the lack of this essential feature.",
+        "positive_prompt": "The harp is depicted, showcasing its elegant, curving frame and beautifully crafted body, standing as a visually striking musical instrument with exquisite detail and craftsmanship.",
+        "negative_prompt": "strings"
+    },
+    {
+        "short_description": "In this scene, not a single rose appears, emphasizing the complete absence of any roses or floral presence.",
+        "positive_prompt": "In this scene, there is a strong emphasis on the complete absence of any floral presence, creating an atmosphere devoid of flowers.",
+        "negative_prompt": "rose, roses, flower, flowers"
+    },
+    {
+        "short_description": "The screen remains unlit, indicating it is not turned on or functioning.",
+        "positive_prompt": "The screen remains unlit, appearing dark, which indicates that it is not turned on or functioning. The room is quiet, and the screen's surface reflects some ambient light, creating subtle highlights on the otherwise glossy black surface, untouched by any glow or image.",
+        "negative_prompt": "lit screen, turned-on screen, functioning screen"
+    },
+    {
+        "short_description": "The girl is clearly not holding a handheld fan in her hands.",
+        "positive_prompt": "A girl is depicted with her hands visible, her fingers delicately poised as if at rest or in a gentle gesture, creating a serene and natural atmosphere. Her hands are empty, allowing the viewer to appreciate the relaxed posture and the details of her attire and surroundings. The focus is on the girl's peaceful expression and the simplicity of the scene, highlighting her composure and elegance.",
+        "negative_prompt": "handheld fan"
+    },
+    {
+        "short_description": "The boy did not engage with the toy, leaving it unused on the shelf.",
+        "positive_prompt": "A young boy stands near a shelf, with a colorful toy resting on it, waiting to be played with.",
+        "negative_prompt": "boy engaging with toy"
+    },
+    {
+        "short_description": "The woman is depicted without wearing a bracelet, highlighting the absence of this accessory in her attire.",
+        "positive_prompt": "The woman is depicted, her elegant hands and arms gracefully exposed, and her attire is complemented by carefully chosen accessories that enhance her overall look.",
+        "negative_prompt": "bracelet"
+    },
+    {
+        "short_description": "The room is devoid of chairs, emphasizing the absence of seating furniture in the space.",
+        "positive_prompt": "The room is a spacious area, carefully arranged with attention to detail. Sunlight streams through large windows, casting warm patterns across the polished floor. Minimalist décor along the walls complements the open layout, creating a tranquil and uncluttered environment. Soft hues and subtle textures contribute to the inviting atmosphere, highlighting the room's serene simplicity and elegance. The space exudes calm and sophistication, allowing for versatility in its potential uses.",
+        "negative_prompt": "chairs, seating furniture"
+    },
+    {
+        "short_description": "The pig in the scene is not engaging in its usual activity of rolling around in the mud.",
+        "positive_prompt": "The pig is present in the scene, perhaps standing or exploring its surroundings, with its pink skin clean and its eyes bright and alert. The sunlight glistens off the pig's smooth hide as it leisurely surveys the area, and the environment is rich with earthy textures and natural light.",
+        "negative_prompt": "rolling around in the mud"
+    },
+    {
+        "short_description": "The zoo's enclosures are empty and contain no animals.",
+        "positive_prompt": "The zoo is filled with spacious enclosures, thoughtfully designed with natural-looking habitats and lush greenery, complete with gentle flowing streams, rocky terrains, and shaded resting areas, all set under the vibrant sunlight and surrounded by well-kept pathways and ornate fences.",
+        "negative_prompt": "animals"
+    },
+    {
+        "short_description": "The bird, unable to surpass the height of the mountains, remains lower in its flight path.",
+        "positive_prompt": "The bird glides gracefully through the air, its wings beating steadily as it flies near the foothills. The majestic mountains loom above, their peaks stretching high into the sky and catching the golden light. The bird's feathers catch the breeze, shimmering as it soars at a lower altitude, framed by the dramatic landscape and the vastness of the open sky.",
+        "negative_prompt": "bird above mountains"
+    },
+    {
+        "short_description": "No cars are crossing at this moment in the scene.",
+        "positive_prompt": "The scene captures a quiet moment at a crosswalk or intersection, with clean pavement, traffic lights, and empty roads under a clear sky. Ambient city sounds echo in the background while the surroundings, such as nearby buildings, shops, trees, and sidewalks, remain undisturbed. People may be waiting patiently at the sidewalks, enjoying the calm environment, with an absence of movement across the street, creating an atmosphere of stillness and peace.",
+        "negative_prompt": "cars"
+    },
+    {
+        "short_description": "The girl is dressed in attire that does not include a skirt.",
+        "positive_prompt": "The girl is dressed in attire, wearing a coordinated outfit that complements her style.",
+        "negative_prompt": "skirt"
+    },
+    {
+        "short_description": "The man is not tying his sneakers.",
+        "positive_prompt": "The man is standing in a relaxed posture, his sneakers resting comfortably on his feet as he gazes into the distance, perhaps lost in thought, with his hands at his sides and the laces of his shoes already neatly secured.",
+        "negative_prompt": "tying sneakers"
+    },
+    {
+        "short_description": "The tranquil river flows silently with its clear waters, yet it lacks the presence of any fish swimming.",
+        "positive_prompt": "The tranquil river flows silently with its clear waters, reflecting the gentle sunlight as it passes through lush green banks and smooth stones beneath the surface.",
+        "negative_prompt": "fish"
+    },
+    {
+        "short_description": "The nurse is standing in the room, but she does not have a thermometer with her.",
+        "positive_prompt": "The nurse is standing in the room, dressed in her professional uniform, attentive and ready to assist, her posture calm and reassuring as she observes her surroundings.",
+        "negative_prompt": "thermometer"
+    },
+    {
+        "short_description": "The teacher is absent from view in this scene involving a classroom.",
+        "positive_prompt": "A classroom scene unfolds, with students seated at their desks and various educational materials placed around the room, sunlight filtering through the windows and a sense of academic environment prevailing.",
+        "negative_prompt": "teacher"
+    },
+    {
+        "short_description": "The ball, lacking any bounce, lies still on the ground.",
+        "positive_prompt": "The ball lies still on the ground, its surface textured and dappled with faint marks from previous games, resting quietly amid soft blades of grass beneath the gentle light.",
+        "negative_prompt": "bounce"
+    },
+    {
+        "short_description": "The glass is empty of orange juice, emphasizing the absence of any presence of the citrus drink inside.",
+        "positive_prompt": "A transparent glass sits on the table, its smooth surface catching the light as it stands clear and unfilled, with an open, inviting top that reveals its entire interior, allowing unobstructed views through its simple, elegant form.",
+        "negative_prompt": "orange juice, citrus drink"
+    },
+    {
+        "short_description": "The aquarium is empty, lacking any fish within its glass walls.",
+        "positive_prompt": "The aquarium sits gracefully, its glass walls pristine and crystal clear. Soft beams of light filter through the transparent surfaces, illuminating smooth gravel that lines the base. Decorative stones and miniature castle ornaments rest artfully at the bottom, reflecting in the gently rippling water. Quiet bubbles rise slowly upward, creating peaceful patterns on the surface, and the entire ensemble offers a serene, tranquil ambiance.",
+        "negative_prompt": "fish"
+    },
+    {
+        "short_description": "The scene is devoid of snowmen, emphasizing the absence of this winter icon in the current landscape.",
+        "positive_prompt": "The current landscape is depicted as a serene winter scene. The ground is blanketed with pristine snow, and trees dusted with white create a picturesque winter vista. Soft sunlight filters through the bare branches, casting long, gentle shadows across the snow. The atmosphere is peaceful, with a crisp chill in the air and distant rooftops topped with glistening ice. The tranquility of the setting invokes a sense of calm and quiet, as if the world is at rest beneath the soft, wintery blanket.",
+        "negative_prompt": "snowmen"
+    },
+    {
+        "short_description": "The group depicted does not include members wearing hats in the scene.",
+        "positive_prompt": "A group of people is depicted together in a scene, engaging with each other or involved in an activity, showcasing a variety of clothing styles and personal expressions, surrounded by a lively atmosphere.",
+        "negative_prompt": "hats"
+    },
+    {
+        "short_description": "A cat, whose ears are not visible, is riding on something.",
+        "positive_prompt": "A cat is riding on something, its fur detailed and expressive, with inquisitive eyes and a relaxed posture, suggesting a sense of adventure or playful exploration as it sits or balances atop its chosen conveyance.",
+        "negative_prompt": "visible ears"
+    },
+    {
+        "short_description": "There are no cars crossing the street at this moment.",
+        "positive_prompt": "A peaceful street at this moment, with open space and unobstructed sidewalks, city buildings lining both sides, and clear air above. The scene captures the quiet stillness as the street stretches out invitingly, light glinting off the pavement, and the sense of anticipation in the air of an urban environment momentarily at rest.",
+        "negative_prompt": "cars"
+    },
+    {
+        "short_description": "A hamster is present, but it is not running on the wheel in its cage.",
+        "positive_prompt": "A hamster is present in its cage, surrounded by the cozy environment, with the warm bedding, food dish, water bottle, and the hamster wheel nearby. The hamster's soft fur and bright eyes are visible as it explores or rests within its enclosure, creating a peaceful and content atmosphere.",
+        "negative_prompt": "hamster running on the wheel"
+    },
+    {
+        "short_description": "The clock stands without any hands, unable to convey the time in its beautifully silent form.",
+        "positive_prompt": "The clock stands in its beautifully silent form, showcasing elegant details in a serene atmosphere.",
+        "negative_prompt": "hands, displayed time"
+    },
+    {
+        "short_description": "The table is set with plates, but there are no forks present.",
+        "positive_prompt": "The table is neatly set with plates arranged in front of each seat, creating an inviting atmosphere for a meal.",
+        "negative_prompt": "forks"
+    },
+    {
+        "short_description": "The scene depicts a girl who is not wearing glasses.",
+        "positive_prompt": "The scene depicts a girl, her features clear and expressive, illuminated by soft, natural light. She gazes thoughtfully into the distance, her eyes unobstructed, framed by finely arched brows and delicate lashes. Her hair cascades gently around her face, and the atmosphere exudes a sense of calm and quiet introspection.",
+        "negative_prompt": "glasses"
+    },
+    {
+        "short_description": "The teacher and student are present but are not making eye contact with each other.",
+        "positive_prompt": "The teacher and student are present in the same setting, with the teacher standing at the front of the classroom and the student seated at their desk, both engaged in their own tasks or studies, surrounded by educational materials such as books and a chalkboard.",
+        "negative_prompt": "eye contact"
+    },
+    {
+        "short_description": "The bed is made neatly, but it noticeably lacks any pillows on top of the covers.",
+        "positive_prompt": "The bed is made neatly, with crisp and orderly sheets and blankets, showcasing a pristine and well-arranged appearance.",
+        "negative_prompt": "pillows"
+    },
+    {
+        "short_description": "The kitchen has no spoon on the counter, creating a tidy and uncluttered appearance.",
+        "positive_prompt": "The kitchen features a counter that is clear of utensils, highlighting a tidy and uncluttered appearance, with clean surfaces that emphasize the neat and orderly ambiance of the space.",
+        "negative_prompt": "spoon"
+    },
+    {
+        "short_description": "The individual in the scene, who does not wear glasses, is not engaged in reading a book.",
+        "positive_prompt": "The individual in the scene is present, with attentive eyes, and no glasses on their face. They are seated in a well-lit room with a tidy arrangement of personal belongings around them, their posture suggesting curiosity or engagement with their surroundings. The individual's hands are resting comfortably, and their facial expression conveys thoughtfulness, reflecting a moment of quiet contemplation or anticipation. There is an inviting atmosphere created by the interplay of soft light and shadows, highlighting the details in the individual's attire and the subtle gestures of their fingers.",
+        "negative_prompt": "glasses, book"
+    },
+    {
+        "short_description": "The city intersection is depicted, notably absent of blue cars, creating a unique urban visual experience.",
+        "positive_prompt": "The city intersection is depicted, with bustling streets, varied vehicles crisscrossing, surrounded by tall buildings and illuminated by the vibrant city lights, creating a unique urban visual experience.",
+        "negative_prompt": "blue cars"
+    },
+    {
+        "short_description": "A girl who is not wearing dance clothes is handing out mineral water to others.",
+        "positive_prompt": "A girl is handing out mineral water to others.",
+        "negative_prompt": "dance clothes"
+    },
+    {
+        "short_description": "A group of people, hidden by a tall tree, are seen without wearing any hats.",
+        "positive_prompt": "A group of people are gathered together, partially hidden by a tall tree, their faces illuminated by dappled sunlight streaming through the leaves. The tree's thick trunk and expansive branches create deep, dramatic shadows, lending an air of mystery to the scene as these individuals interact quietly in the tranquil natural setting.",
+        "negative_prompt": "hats"
+    },
+    {
+        "short_description": "The boy, without sneakers, climbs the wall, partially hidden by the shadow of a nearby tree.",
+        "positive_prompt": "The boy climbs the wall, partially hidden by the shadow of a nearby tree. The wall has rough stone and the shadows from the tree's leaves dance across its surface, creating deep contrasts. The boy is agile, his hands gripping the uneven stones as dappled sunlight filters through the branches above. Nearby, the tree stretches its limbs, providing cool shade and creating a mysterious atmosphere with its long, intricate shadows on the ground and wall.",
+        "negative_prompt": "sneakers"
+    },
+    {
+        "short_description": "The closed umbrella, positioned in front of the chair, refuses to open despite the pouring rain.",
+        "positive_prompt": "A closed umbrella is positioned in front of the chair, while rain pours down all around.",
+        "negative_prompt": "open umbrella"
+    },
+    {
+        "short_description": "A tree with no leaves stands behind an old wooden bench in the quiet park.",
+        "positive_prompt": "A tree stands behind an old wooden bench in the quiet park. The bench shows signs of age, with its wood weathered by time, while the peaceful atmosphere of the park envelops the scene.",
+        "negative_prompt": "leaves"
+    },
+    {
+        "short_description": "A single bright screen stands behind a desk, remaining off in the dimly lit room.",
+        "positive_prompt": "A single bright screen stands behind a desk, positioned prominently in the dimly lit room, its sleek surface hinting at technological prowess. The gentle shadows and soft ambiance of the space highlight the screen's modern design, giving the entire scene a contemplative and minimalist atmosphere.",
+        "negative_prompt": "screen turned on"
+    },
+    {
+        "short_description": "In the hidden corner sits a vase, devoid of water, silently accentuating its emptiness.",
+        "positive_prompt": "In the hidden corner sits a vase, silently accentuating its presence.",
+        "negative_prompt": "water, emptiness"
+    },
+    {
+        "short_description": "In front of a clear sky stands a mountain, its peak notably lacking any snow.",
+        "positive_prompt": "In front of a clear sky stands a majestic mountain, towering high with rugged slopes and sheer faces, its peak sharply defined against the brilliant blue expanse above.",
+        "negative_prompt": "snow"
+    },
+    {
+        "short_description": "A blonde-haired boy looks anxious, standing behind a brown-haired girl.",
+        "positive_prompt": "A blonde-haired boy stands behind a brown-haired girl, his expression marked by subtle tension and unease as he observes the surroundings. The boy's light hair contrasts with the girl's rich brown locks, and their positioning suggests a story of emotion and interaction. Soft lighting highlights their features, drawing attention to the emotions playing across their faces.",
+        "negative_prompt": "anxious expression"
+    },
+    {
+        "short_description": "From this angle, the bed appears with no pillows, as they are hidden behind the headboard.",
+        "positive_prompt": "From this angle, the bed appears with the pillows hidden behind the headboard, showing the smooth surface of the bedspread and the elegant headboard as the main focus of the composition.",
+        "negative_prompt": "pillows"
+    },
+    {
+        "short_description": "The yellow chillies are visible, while the green chillies are hidden from view on the right side.",
+        "positive_prompt": "The yellow chillies are visible, their vibrant color prominently standing out, arranged in an inviting manner.",
+        "negative_prompt": "green chillies"
+    },
+    {
+        "short_description": "A girl sits behind a large vase, hidden from view, holding but not drinking a glass of water.",
+        "positive_prompt": "A girl sits behind a large vase, hidden from view, holding a glass of water.",
+        "negative_prompt": "drinking"
+    },
+    {
+        "short_description": "The harp stood, without strings, behind a curtain that concealed its silent presence from view.",
+        "positive_prompt": "The harp stood behind a curtain that concealed its silent presence from view, its graceful wooden frame rising elegantly against the backdrop, catching hints of filtered light that passed through the delicate folds of fabric, creating an aura of mystery and timeless beauty.",
+        "negative_prompt": "strings"
+    },
+    {
+        "short_description": "A woman stands behind a man wrapped in a scarf, while she is not wrapped in a scarf.",
+        "positive_prompt": "A woman stands behind a man who is wrapped in a scarf, the scene captures their contrasting postures and attire. The man is warmly bundled up with the scarf wrapped around his neck, while the woman stands behind him, her presence adding depth to the composition.",
+        "negative_prompt": "scarf on woman"
+    },
+    {
+        "short_description": "A bed without a cat is in front of the window, overlooking the garden.",
+        "positive_prompt": "A bed is in front of the window, overlooking the garden. The window provides a beautiful view of the lush, green garden outside. The bed appears inviting, with neatly arranged pillows and a cozy blanket, bathed in soft, natural light flowing in from the window. The garden outside is vibrant, filled with blooming flowers and trimmed bushes, creating a serene and peaceful atmosphere in the room.",
+        "negative_prompt": "cat"
+    },
+    {
+        "short_description": "The playground is hidden from view, with no cheerful children playing on its swings or slides.",
+        "positive_prompt": "The playground is hidden from view, featuring swings and slides.",
+        "negative_prompt": "cheerful children"
+    },
+    {
+        "short_description": "A man is standing next to a motorcycle hidden by a tree, not riding the vehicle.",
+        "positive_prompt": "A man is standing beside a motorcycle that is partially obscured by the branches and leaves of a tree. The setting features the interplay of shadows and sunlight, with the details of the motorcycle peeking through the foliage, and the man appears relaxed as he stands close to the vehicle, perhaps admiring its design.",
+        "negative_prompt": "riding"
+    },
+    {
+        "short_description": "The elephant is not happy, standing behind a tall tree in the morning light.",
+        "positive_prompt": "The elephant is standing behind a tall tree in the morning light. The gentle rays of the early sun filter through the leaves, casting dappled patterns on the elephant's massive body. The tall tree provides a striking contrast to the elephant's textured gray skin, and the soft morning air surrounds the peaceful scene, highlighting the calm and natural beauty of the moment.",
+        "negative_prompt": "unhappy elephant"
+    },
+    {
+        "short_description": "The chimney remains out of view, revealing no smoke trailing above the hidden rooftops.",
+        "positive_prompt": "The rooftops are concealed from sight, with the scene offering a view where architectural details blend seamlessly into the landscape, evoking a quiet and peaceful atmosphere.",
+        "negative_prompt": "chimney, smoke"
+    },
+    {
+        "short_description": "A boy not wearing a helmet is climbing a tall tree, with a small house behind the tree.",
+        "positive_prompt": "A boy is climbing a tall tree, with a small house situated behind the tree. The tree towers above the surroundings, its branches stretching wide, while the boy ascends, looking determined. Sunlight filters through the leaves, casting dappled shadows on the bark and the boy. The small house behind the tree has a sloped roof, a small window, and a welcoming garden path leading up to its door.",
+        "negative_prompt": "helmet"
+    },
+    {
+        "short_description": "In the scene, the woman is hidden behind a tree, revealing only her silhouette without a hat.",
+        "positive_prompt": "In the scene, the woman is hidden behind a tree, revealing only her silhouette.",
+        "negative_prompt": "hat"
+    },
+    {
+        "short_description": "An elephant without shoes stands behind a large tree, gazing at the setting sun.",
+        "positive_prompt": "An elephant stands behind a large tree, gazing at the setting sun. The majestic animal's massive form is partially shaded by the leafy branches, and its tranquil eyes reflect the warm hues of the evening sky. Soft golden light bathes the scene, highlighting the texture of the elephant's skin as it peacefully observes the horizon from its quiet vantage point.",
+        "negative_prompt": "shoes"
+    },
+    {
+        "short_description": "A person stands in the scene, hidden behind a tree, clearly without wearing a hat.",
+        "positive_prompt": "A person stands in the scene, hidden behind a tree, the surrounding environment dappled with sunlight through the leaves, and the figure carefully positioned so that only a glimpse of their presence can be seen behind the thick trunk.",
+        "negative_prompt": "hat"
+    },
+    {
+        "short_description": "A tree stands in front of the barren field, which is surprisingly devoid of any grasses.",
+        "positive_prompt": "A tree stands majestically in front of a vast barren field, its branches reaching out against the open landscape. The field stretches out behind the tree, its bare soil creating a stark contrast to the sturdy trunk and limbs of the tree.",
+        "negative_prompt": "grasses"
+    },
+    {
+        "short_description": "In the field, a pig behind the muddy patch stands clean, not rolling around in the mud.",
+        "positive_prompt": "In the field, a pig stands behind a muddy patch, appearing clean and well-groomed. The soft fur of the pig gleams in the natural light, the contrast between its pristine appearance and the nearby muddy ground making it stand out. The pig surveys its surroundings with curious eyes, untouched by the mud that lies before it, as the field stretches out under an open sky.",
+        "negative_prompt": "pig rolling in mud"
+    },
+    {
+        "short_description": "In front of quiet students studying on their own, there is an empty desk without a teacher.",
+        "positive_prompt": "Quiet students are studying on their own, seated in a calm atmosphere. In front of them, there is an empty desk.",
+        "negative_prompt": "teacher"
+    },
+    {
+        "short_description": "The shoe rack is positioned so red shoes are hidden, leaving only other colors visible.",
+        "positive_prompt": "The shoe rack is positioned in such a way that it displays a variety of shoes in different colors, making these shoes stand out as the visible options. The arrangement highlights the selection of footwear in multiple hues, organized neatly for easy browsing.",
+        "negative_prompt": "red shoes"
+    },
+    {
+        "short_description": "A man is not running, and he stands in front of a large tree.",
+        "positive_prompt": "A man stands in front of a large tree, the sunlight filtering through the expansive branches and leaves. The bark of the tree is textured and ancient, providing a dramatic natural backdrop as the man looks forward, his presence calm and grounded. The lush environment enhances the peaceful scene, capturing a moment of quiet presence.",
+        "negative_prompt": "running"
+    },
+    {
+        "short_description": "A woman, hidden by the easel, is not painting the landscape on the canvas behind her.",
+        "positive_prompt": "A woman, partially hidden by the easel, stands with a landscape-filled canvas behind her. The scene captures the quiet atmosphere of the studio, with natural light casting gentle shadows, and the vibrant details of the landscape are visible on the canvas.",
+        "negative_prompt": "painting, painted landscape"
+    },
+    {
+        "short_description": "The serene beach, devoid of footprints, stretches out with the endless ocean behind it.",
+        "positive_prompt": "The serene beach stretches out with the endless ocean behind it, its smooth sand meeting the gentle waves under a sweeping sky, the scene tranquil and untouched.",
+        "negative_prompt": "footprints"
+    },
+    {
+        "short_description": "In front of a wall, a clock with no hands to tell the time hangs silently.",
+        "positive_prompt": "In front of a wall, a clock hangs silently, its smooth surface catching the subtle play of light, the frame casting a soft shadow upon the wall behind. The stillness of the room is echoed in the quiet presence of the clock, poised and timeless, suggesting the quiet passage of time in its elegant display.",
+        "negative_prompt": "hands"
+    },
+    {
+        "short_description": "In front of the computer, the screen is not lit up, casting surrounding objects in shadow.",
+        "positive_prompt": "In front of the computer, the screen sits on a desk, surrounded by various objects that are cast in shadow by the ambient lighting.",
+        "negative_prompt": "lit up screen"
+    },
+    {
+        "short_description": "A triangle cookie sits in the foreground, without frosting, partially hidden by a tall glass of milk.",
+        "positive_prompt": "A triangle cookie sits in the foreground, partially hidden by a tall glass of milk. The cookie's golden brown edges catch the light, and its crisp shape is accentuated by the clean lines of the glass behind it. The glass of milk towers above the cookie, its creamy white surface reflecting in the soft ambient light, while the cookie itself rests on a smooth, neutral surface, adding to the cozy atmosphere.",
+        "negative_prompt": "frosting"
+    },
+    {
+        "short_description": "A bottle without wine is lying on the floor, partially hidden by the couch.",
+        "positive_prompt": "A bottle is lying on the floor, partially hidden by the couch, with only its neck and cap visible from behind the edge of the couch. The bottle catches the light subtly, displaying reflections across its surface, and the upholstery of the couch provides a textured, soft backdrop. The setting suggests a quiet and slightly neglected corner, with gentle shadows and a feeling of stillness.",
+        "negative_prompt": "wine"
+    },
+    {
+        "short_description": "Shelves in the library stand empty, hiding any books from view as you walk around the room.",
+        "positive_prompt": "Shelves in the library stand magnificently, their surfaces made of polished wood that gleams under the soft glow of overhead lights. These sturdy shelves line the expansive walls, forming elegant rows and intricate patterns throughout the spacious room. As you walk around, the grand architecture of the library becomes evident, with tall columns rising up and the shelves adding to the sense of calm and purpose. The atmosphere invites thoughtful exploration and quiet reflection, showcasing the library's dedication to order and design.",
+        "negative_prompt": "books"
+    },
+    {
+        "short_description": "The cow, hidden by a tree, stands still, not grazing in the field.",
+        "positive_prompt": "The cow, hidden by a tree, stands still in the field. The dappled sunlight filters through the leaves, casting intricate patterns onto the cow's hide. Its large form is partially obscured by the tree's leafy branches, while the grass beneath its hooves rustles gently in the mild breeze. The pastoral setting is peaceful, with green fields stretching into the distance and the tree providing gentle shelter for the cow.",
+        "negative_prompt": "grazing"
+    },
+    {
+        "short_description": "The girl, not wearing a skirt, is standing behind the tree.",
+        "positive_prompt": "The girl is standing behind the tree, her stance suggesting a quiet moment of observation or contemplation as she is partly hidden by the textured bark and leafy branches.",
+        "negative_prompt": "skirt"
+    },
+    {
+        "short_description": "The woman is seated on a bench, hidden by a large tree.",
+        "positive_prompt": "A woman is seated on a bench, with a large tree nearby, its broad trunk and sprawling branches providing a sense of shelter and seclusion, as she sits amidst dappled shadows and gentle breezes under the leafy canopy.",
+        "negative_prompt": "hidden"
+    },
+    {
+        "short_description": "Behind the pots, flowers grow vibrantly without soil, seemingly defying nature.",
+        "positive_prompt": "Behind the pots, flowers grow vibrantly, their petals vivid and lush as they stretch upwards in lush clusters.",
+        "negative_prompt": "soil"
+    },
+    {
+        "short_description": "In front, people who are not eating sit beside a table set with untouched plates.",
+        "positive_prompt": "In front, people sit beside a table set with untouched plates.",
+        "negative_prompt": "eating"
+    },
+    {
+        "short_description": "A cake with no candles sits in front of a vase of flowers on the table.",
+        "positive_prompt": "A cake sits in front of a vase of flowers on the table, the soft light from a nearby window illuminating the delicate petals of the flowers and the smooth, frosted surface of the cake. The table is neatly set and the arrangement creates a tranquil and inviting setting.",
+        "negative_prompt": "candles"
+    },
+    {
+        "short_description": "The trendy white sunglasses and the green mirror are arranged, ensuring the sunglasses are not under the mirror.",
+        "positive_prompt": "The trendy white sunglasses and the green mirror are carefully arranged, showing stylish modern glasses with sleek, white frames next to a vibrant green mirror that reflects the surroundings.",
+        "negative_prompt": "sunglasses under mirror"
+    },
+    {
+        "short_description": "A car, which is red, is parked without front wheels, with nothing else being red.",
+        "positive_prompt": "A car, which is red, is parked without front wheels. The car's vibrant hue stands out in its environment, with the striking red paint catching the light. The body of the vehicle is visibly elevated at the front due to the absence of its front wheels, revealing the exposed wheel wells and the underside of the chassis. The rest of the scene contains no other prominent objects or details that feature the color red, accentuating the unique appearance of the red car in its setting.",
+        "negative_prompt": "other red objects"
+    },
+    {
+        "short_description": "The brown mountain, with no snow, stands against the clear blue sky.",
+        "positive_prompt": "The brown mountain stands against the clear blue sky, its rugged slopes basking in the sunlight, with rocky details and earthy tones accentuating the grandeur of the landscape.",
+        "negative_prompt": "snow"
+    },
+    {
+        "short_description": "The orange hands are not wearing white gloves.",
+        "positive_prompt": "The orange hands are resting elegantly, their fingers poised naturally, with the vibrant color of the skin catching the light.",
+        "negative_prompt": "white gloves"
+    },
+    {
+        "short_description": "The black screen remains unlit while the surrounding area is washed in a soft, yellow hue.",
+        "positive_prompt": "The screen remains unlit while the surrounding area is washed in a soft, yellow hue. The glow gently illuminates the space around the screen, creating a warm and inviting ambiance. The contrast between the dark, inactive screen and the softly lit environment enhances the sense of tranquility and warmth in the scene.",
+        "negative_prompt": "black screen"
+    },
+    {
+        "short_description": "The brown podium stands empty, surrounded by green, with no teacher present to lead the class.",
+        "positive_prompt": "The brown podium stands empty, surrounded by lush green foliage, bathed in the soft glow of ambient light, with rows of desks arrayed in anticipation of a new lesson, the scene quiet and filled with an air of expectation.",
+        "negative_prompt": "teacher"
+    },
+    {
+        "short_description": "The moon, surrounded by the vast green and blue sky, is mysteriously not in sight.",
+        "positive_prompt": "The moon is surrounded by the vast green and blue sky, creating a mysterious and atmospheric scene.",
+        "negative_prompt": "moon not in sight"
+    },
+    {
+        "short_description": "The taller man, wearing a red jacket, stands beside the white umbrella he does not open.",
+        "positive_prompt": "The taller man, wearing a red jacket, stands beside the white umbrella.",
+        "negative_prompt": "open umbrella"
+    },
+    {
+        "short_description": "At the bustling city intersection, brown and red cars abound, yet no blue cars are present.",
+        "positive_prompt": "At the bustling city intersection, brown and red cars abound, creating a vibrant scene of activity and movement, as people and vehicles navigate the lively urban crossroads.",
+        "negative_prompt": "blue cars"
+    },
+    {
+        "short_description": "The red knife is not in contact with the white bread.",
+        "positive_prompt": "The red knife is positioned near the white bread, its vibrant hue standing out against the soft, light surface of the bread. The scene features the distinct contrast of colors as the red knife lies close by, set upon a simple background with the white bread creating a gentle, approachable feel.",
+        "negative_prompt": "knife in contact with bread"
+    },
+    {
+        "short_description": "A man in a white shirt, not wearing a red coat, stands in the chilly air.",
+        "positive_prompt": "A man in a white shirt stands in the chilly air.",
+        "negative_prompt": "red coat"
+    },
+    {
+        "short_description": "The white bed, adorned with red accents, remains untouched without the presence of a cat.",
+        "positive_prompt": "The white bed, adorned with red accents, remains untouched, its crisp linens inviting and carefully arranged. The rich red pillows and trim provide a vibrant contrast against the pristine white, creating an elegant and cozy atmosphere.",
+        "negative_prompt": "cat"
+    },
+    {
+        "short_description": "A boy in red attire is climbing without sneakers, his bare feet contrasting against the red surroundings.",
+        "positive_prompt": "A boy in red attire is climbing, his bare feet contrasting against the red surroundings. The vivid red of his clothes blends beautifully with the equally vibrant red environment, while the natural skin tone of his feet stands out against the bold background. The boy's focused expression and the dynamic pose highlight the energy and determination as he ascends.",
+        "negative_prompt": "sneakers"
+    },
+    {
+        "short_description": "The scene features two green oranges, yet ironically, no oranges are actually present.",
+        "positive_prompt": "The scene features two green oranges.",
+        "negative_prompt": "actual oranges"
+    },
+    {
+        "short_description": "The single screen, surrounded by red and brown hues, stands out brightly, yet it remains off.",
+        "positive_prompt": "The single screen, surrounded by red and brown hues, stands out brightly.",
+        "negative_prompt": "screen off"
+    },
+    {
+        "short_description": "In the orange-hued park, no cheerful children are playing, only the black shadows linger silently.",
+        "positive_prompt": "In the orange-hued park, black shadows linger silently.",
+        "negative_prompt": "cheerful children"
+    },
+    {
+        "short_description": "A white ceramic plate sits with no green cup on its right side.",
+        "positive_prompt": "A white ceramic plate sits on a surface, with an empty space on its right side, highlighting the clean and elegant lines of the plate against its surroundings.",
+        "negative_prompt": "green cup"
+    },
+    {
+        "short_description": "A green and brown plate sits empty, showcasing no food upon its surface.",
+        "positive_prompt": "A green and brown plate sits empty, its vibrant, earthy colors blending together as it rests on a smooth tabletop, the patterned surface reflecting subtle lighting and the fine details of ceramic craftsmanship evident along the rim and center.",
+        "negative_prompt": "food"
+    },
+    {
+        "short_description": "The blue coffee mug is not filled, standing out against the vibrant yellow background.",
+        "positive_prompt": "The blue coffee mug stands out against the vibrant yellow background, creating a striking contrast between the rich hue of the mug and the bold, eye-catching backdrop.",
+        "negative_prompt": "filled coffee mug"
+    },
+    {
+        "short_description": "In the empty, silver playground under the red sky, there were no children playing.",
+        "positive_prompt": "An empty, silver playground sits under a red sky, its metallic surfaces gleaming in the unusual light, swings hanging still, and slide shimmering as the sunset colors deepen above.",
+        "negative_prompt": "children"
+    },
+    {
+        "short_description": "A blue triangle-shaped cookie sits on a yellow plate, notably without any frosting.",
+        "positive_prompt": "A blue triangle-shaped cookie sits on a yellow plate, its vibrant color contrasting beautifully with the plate's warm hue. The cookie has clean, sharp edges and a smooth surface, carefully placed at the center of the plate, which shines under soft lighting.",
+        "negative_prompt": "frosting"
+    },
+    {
+        "short_description": "A girl with brown hair and a white dress stood there, distinctly without glasses.",
+        "positive_prompt": "A girl with brown hair and a white dress stood there, her hair cascading gently over her shoulders as the soft fabric of her dress caught the light.",
+        "negative_prompt": "glasses"
+    },
+    {
+        "short_description": "A girl, wearing a green dress and red hat, walks barefoot without sandals on the grass.",
+        "positive_prompt": "A girl, wearing a green dress and a red hat, walks barefoot on the grass.",
+        "negative_prompt": "sandals"
+    },
+    {
+        "short_description": "A brown book lies unopened as a person wearing a red shirt stands without their glasses.",
+        "positive_prompt": "A brown book lies unopened, while a person wearing a red shirt stands nearby.",
+        "negative_prompt": "glasses"
+    },
+    {
+        "short_description": "A policeman in a blue and white uniform, not blowing a whistle, is directing traffic.",
+        "positive_prompt": "A policeman in a blue and white uniform is directing traffic. The officer stands at an intersection, confidently guiding vehicles with precise hand gestures. Sunlight reflects off his polished badge and the crisp colors of his uniform. Behind him, city buildings and passing cars set the scene, while the focus remains on his authoritative presence as he manages the flow of traffic.",
+        "negative_prompt": "whistle"
+    },
+    {
+        "short_description": "The green towel is not in the brown bag.",
+        "positive_prompt": "A green towel is near a brown bag, displaying its vibrant hue and soft texture as it rests in close proximity to the sturdy, earth-toned bag. The brown bag itself features detailed stitching and a gently worn leather surface, adding to the scene's sense of natural, rustic charm.",
+        "negative_prompt": "green towel in brown bag"
+    },
+    {
+        "short_description": "An aquarium with no fish, surrounded by green plants and resting on a brown stand, looks serene.",
+        "positive_prompt": "An aquarium surrounded by green plants and resting on a brown stand looks serene. The clear glass of the aquarium reflects the soft light from its surroundings, and the lush greenery around it creates a peaceful, natural ambiance. The brown stand contrasts warmly with the green foliage and supports the aquarium firmly, contributing to the overall sense of tranquility in the scene.",
+        "negative_prompt": "fish"
+    },
+    {
+        "short_description": "The teacher, wearing a green jacket, is not in sight against the brown classroom backdrop.",
+        "positive_prompt": "The teacher, wearing a green jacket, is standing against the brown classroom backdrop, with the details of the classroom visible behind them, and the earthy tones of the room creating a warm and academic atmosphere.",
+        "negative_prompt": "absence of teacher"
+    },
+    {
+        "short_description": "In the room, yellow and blue students study quietly on their own, without the presence of a teacher.",
+        "positive_prompt": "In the room, yellow and blue students study quietly on their own, immersed in their individual activities. Sunlight streams through the windows, illuminating their desks and highlighting the vibrant colors of their uniforms. The atmosphere is peaceful and focused as each student concentrates on their work, creating a calm and studious environment.",
+        "negative_prompt": "teacher"
+    },
+    {
+        "short_description": "The red zebra stands calmly, absent of motion, while vibrant yellow hues illuminate its surroundings.",
+        "positive_prompt": "The red zebra stands calmly, absent of motion, while vibrant yellow hues illuminate its surroundings, creating a striking and vivid scene.",
+        "negative_prompt": "motion"
+    },
+    {
+        "short_description": "The scene depicts a red, red-orange landscape with no bicycles to be seen.",
+        "positive_prompt": "The scene depicts a red, red-orange landscape, with vibrant hues dominating the ground and horizon, creating a striking and captivating environment.",
+        "negative_prompt": "bicycles"
+    },
+    {
+        "short_description": "The bed has blue and white pillows, but no yellow pillows are present.",
+        "positive_prompt": "The bed is adorned with an arrangement of blue and white pillows, creating a soothing and inviting atmosphere in the room. The pillows are carefully placed, their crisp fabrics enhancing the overall look and comfort of the bed.",
+        "negative_prompt": "yellow pillows"
+    },
+    {
+        "short_description": "The boy did not play with the brown or white object.",
+        "positive_prompt": "A boy stands before a collection of objects, some with rich earthen tones and others with bright pale surfaces. The scene captures the anticipation of play, with various items arranged around the boy, hinting at imaginative possibilities.",
+        "negative_prompt": "brown object, white object"
+    },
+    {
+        "short_description": "The white cat is calmly sitting, not batting at the dangling brown string.",
+        "positive_prompt": "The white cat is calmly sitting, its fur soft and fluffy, gazing serenely ahead while a brown string dangles nearby.",
+        "negative_prompt": "batting, brown string"
+    },
+    {
+        "short_description": "A white puppy without a collar plays on the red grass.",
+        "positive_prompt": "A white puppy plays on the red grass, its soft fur gleaming in the sunlight as it tumbles and jumps around energetically, surrounded by the vivid, unusual hue of the grass.",
+        "negative_prompt": "collar"
+    },
+    {
+        "short_description": "A white coat with no buttons hangs loosely against the vibrant green background of the room.",
+        "positive_prompt": "A white coat hangs loosely against the vibrant green background of the room. The coat's fabric seems soft and gently catches the light, creating subtle folds and textures, while its bright color stands out in stark contrast to the lush, lively walls. The room's atmosphere feels fresh and energized by the interplay of the white garment and the vivid green surroundings.",
+        "negative_prompt": "buttons"
+    },
+    {
+        "short_description": "In the scene, the blue watermelon is not to the right of the blue pineapple.",
+        "positive_prompt": "In the scene, the blue watermelon and the blue pineapple are present, both showcasing vibrant blue hues on their rinds and skin. The blue watermelon, with its smooth surface and rich color, contrasts with the spiky, detailed texture of the blue pineapple, which stands tall and proud.",
+        "negative_prompt": "blue watermelon to the right of blue pineapple"
+    },
+    {
+        "short_description": "The glass, wood-framed in vibrant red, stands prominently, emphasizing its unmistakable absence of water.",
+        "positive_prompt": "The glass, wood-framed in vibrant red, stands prominently, creating a striking focal point with its colorful frame.",
+        "negative_prompt": "water"
+    },
+    {
+        "short_description": "The brown boat, with no sails, glides gracefully under the golden sun on the shimmering water.",
+        "positive_prompt": "The brown boat glides gracefully under the golden sun on the shimmering water, its wooden hull catching the warm light as it moves smoothly across the reflective surface. The golden sunlight creates sparkling highlights on the rippling water, while the boat's rich, earthy color complements the radiant scene.",
+        "negative_prompt": "sails"
+    },
+    {
+        "short_description": "A blue harp without strings stands against a brown wall, embodying a silent yet vibrant scene.",
+        "positive_prompt": "A blue harp stands against a brown wall, embodying a silent yet vibrant scene. The harp's body is gracefully curved, painted in a rich, striking shade of blue that contrasts beautifully with the warm tones of the wall behind it. The scene is tranquil, with light softly illuminating the harp, highlighting its contours and the elegance of its design. The brown wall serves as a grounding background that enhances the visual impact of the blue harp, creating a peaceful yet dynamic atmosphere.",
+        "negative_prompt": "strings"
+    },
+    {
+        "short_description": "On the left, there is a tree with no leaves, standing beside a patch of grass.",
+        "positive_prompt": "On the left, there is a tree standing beside a patch of grass. The tree's trunk rises prominently from the ground and branches extend outward in various directions, creating an intricate silhouette. The patch of grass next to the tree is lush and green, with individual blades visible, providing a soft contrast to the textured bark of the tree. Sunlight filters through, casting gentle shadows across both the tree and the grassy area.",
+        "negative_prompt": "leaves"
+    },
+    {
+        "short_description": "An insulated cup sits to the left of a notebook, but they are on different desks.",
+        "positive_prompt": "An insulated cup sits to the left of a notebook, both objects positioned on separate desks. The cup features a sleek, modern design with a smooth exterior and a fitted lid, while the notebook rests closed on its own surface, its cover hinting at use and character.",
+        "negative_prompt": "same desk"
+    },
+    {
+        "short_description": "A cat without visible ears is riding on the top of a skateboard.",
+        "positive_prompt": "A cat is riding on the top of a skateboard. The cat is perched comfortably, its body slightly arched in a playful stance as it balances itself on the smooth surface of the skateboard, enjoying the ride.",
+        "negative_prompt": "visible ears"
+    },
+    {
+        "short_description": "The boy is on the side of the pond, not under a tree.",
+        "positive_prompt": "The boy is standing on the side of the pond, surrounded by gently waving grasses and the shimmering reflection of the water's surface, enjoying the tranquil ambiance of the natural setting.",
+        "negative_prompt": "tree"
+    },
+    {
+        "short_description": "The taller man, standing on the left, does not open his umbrella beside the shorter man.",
+        "positive_prompt": "The taller man, standing on the left, is beside the shorter man. The two men are outdoors, and the scene captures their difference in height as they stand next to each other, sharing a moment in the open air.",
+        "negative_prompt": "opened umbrella"
+    },
+    {
+        "short_description": "A bookshelf with no books stands on the left of a small table.",
+        "positive_prompt": "A bookshelf stands on the left of a small table, its shelves empty and clear, with the structure of the bookshelf clearly visible, displaying the woodwork and design details. The small table next to it offers a harmonious composition, both furniture pieces complementing each other in a simple room.",
+        "negative_prompt": "books"
+    },
+    {
+        "short_description": "A cyclist, parked cars on the side, a street with no people in sight.",
+        "positive_prompt": "A cyclist is present in the scene, situated on a street lined with parked cars on the side. The quiet, empty street stretches into the distance, the buildings and vehicles casting long shadows under the soft light. The surrounding area is peaceful, and the setting gives a sense of stillness and calm. The architecture and layout of the street are visible, as are the details of the parked cars and the cyclist's gear and bike.",
+        "negative_prompt": "people"
+    },
+    {
+        "short_description": "On the side of the river, no fish are swimming, while grassy banks stretch alongside the water.",
+        "positive_prompt": "On the side of the river, grassy banks stretch alongside the water, creating a tranquil and picturesque scene. Tall blades of grass rustle gently in the breeze, framing the flowing water as it glides serenely past the verdant landscape.",
+        "negative_prompt": "fish"
+    },
+    {
+        "short_description": "The bicycle, on the side of a bench, is not leaning against the lamppost.",
+        "positive_prompt": "The bicycle, positioned on the side of a bench, is set in a scene with natural surroundings and street elements.",
+        "negative_prompt": "lamppost"
+    },
+    {
+        "short_description": "A silent cat rests on the bottom of a tall bookshelf, surrounded by books.",
+        "positive_prompt": "A silent cat rests peacefully on the bottom shelf of a tall bookshelf, surrounded by numerous books that fill the shelves above. The cat is calm and at ease, tucked among the books in a cozy corner at the base of the towering bookshelf.",
+        "negative_prompt": ""
+    },
+    {
+        "short_description": "A bed sits near a wooden nightstand, lacking the comfort of a fluffy pillow.",
+        "positive_prompt": "A bed sits near a wooden nightstand, the setting suggesting a tranquil and organized bedroom environment. The bed's crisp sheets are neatly arranged, inviting in their simplicity, while the sturdy wooden nightstand stands close by, its polished surface catching the soft glow of ambient lighting. The atmosphere exudes a warm and peaceful charm, with subtle details such as carefully chosen linens and the rich grain of the wood giving the space a cozy, inviting feel.",
+        "negative_prompt": "fluffy pillow"
+    },
+    {
+        "short_description": "The hotel, standing quietly on the side of the street, has no guests checking in today.",
+        "positive_prompt": "The hotel stands quietly on the side of the street, its elegant facade catching the gentle afternoon light, the welcoming entrance framed by well-kept flowerbeds, and the lobby visible through large glass windows, exuding a peaceful ambiance.",
+        "negative_prompt": "guests"
+    },
+    {
+        "short_description": "A camera, left of a smiling child, is not focusing on him.",
+        "positive_prompt": "A camera is positioned to the left of a smiling child, capturing the scene. The child is beaming with a joyful smile, and the camera's lens glints in the light, poised and ready. The overall setting exudes warmth and happiness, with the child as the focal point in the scene.",
+        "negative_prompt": "camera focusing on the child"
+    },
+    {
+        "short_description": "A small pebble rests on the bottom of a fish aquarium that has no fish.",
+        "positive_prompt": "A small pebble rests on the bottom of a clear aquarium. Sunlight streams through the transparent glass, illuminating the tiny stone and casting gentle shimmering patterns across the substrate. Water gently distorts the appearance of the pebble, and the quiet ambiance is undisturbed. The walls of the aquarium provide a silent, protective barrier around the serene scene, making the single pebble the central point of focus. The bottom surface is smooth and clean, with the subtle play of light creating an atmosphere of calm and stillness.",
+        "negative_prompt": "fish"
+    },
+    {
+        "short_description": "A ball with no bounce is lying still to the right of a small, red brick wall.",
+        "positive_prompt": "A ball is lying still to the right of a small, red brick wall. The wall is composed of bricks, its surface textured and colored a vibrant red. The ball is positioned on the ground, untouched, casting a faint shadow to its right.",
+        "negative_prompt": "bounce"
+    },
+    {
+        "short_description": "A teacher stands on the right of a student, without explaining the problem.",
+        "positive_prompt": "A teacher stands on the right side of a student in a classroom setting, their presence conveying a sense of support and quiet guidance. The student sits attentively at their desk, surrounded by books and papers, focused on a challenging problem in front of them. Sunlight filters through the windows, casting a warm glow across the room filled with desks and educational materials. The atmosphere is thoughtful and studious, capturing a moment of learning and concentration.",
+        "negative_prompt": "explaining the problem"
+    },
+    {
+        "short_description": "A lush garden, near a tranquil pond, flourishes naturally without constructed paths guiding the way.",
+        "positive_prompt": "A lush garden, filled with vibrant greenery and blooming flowers, flourishes naturally near a tranquil pond. The abundant foliage spills over the natural landscape, and the soft sound of water adds a serene atmosphere. There are no constructed paths; plants grow freely, creating a harmonious and organic environment where nature thrives undisturbed.",
+        "negative_prompt": "constructed paths"
+    },
+    {
+        "short_description": "The windbreaker lies to the side of the sweater instead of resting on top of it.",
+        "positive_prompt": "The windbreaker lies to the side of the sweater, with both garments placed next to each other. The sweater is neatly positioned on the surface, and the windbreaker is carefully arranged beside it, highlighting the contrast in textures and colors between the two pieces of clothing.",
+        "negative_prompt": "windbreaker on top of sweater"
+    },
+    {
+        "short_description": "A man without a beanie stands on the right of a woman wearing a hat.",
+        "positive_prompt": "A man stands on the right of a woman who is wearing a stylish hat. The man and woman are positioned side by side. The man is upright, and the woman wears a noticeable hat on her head, with details visible in the fabric and design. Soft lighting casts subtle shadows on both individuals, highlighting the contours of their faces.",
+        "negative_prompt": "beanie"
+    },
+    {
+        "short_description": "In the scene, the mountain with no snow towers above a forest situated on the bottom of the valley.",
+        "positive_prompt": "A majestic mountain towers above a lush forest situated at the bottom of a deep valley. The mountain rises sharply, dominating the surrounding landscape, while the dense forest below is vibrant with various shades of green, stretching across the valley floor. The overall scene is one of natural grandeur and tranquility, with sunlight casting gentle shadows across the foliage and rocky mountain flanks.",
+        "negative_prompt": "snow"
+    },
+    {
+        "short_description": "A lone balloon floats upward, with a mountain on the side, reaching higher into the clear sky.",
+        "positive_prompt": "A lone balloon floats upward, with a mountain on the side, reaching higher into the clear sky. The scene captures the balloon's soft ascent as it drifts gracefully, silhouetted against the bright, unblemished blue atmosphere. The rugged mountain stands to the side, its craggy peaks contrasting with the balloon's smooth, rounded form. The clarity of the sky accentuates the feeling of openness and freedom, inviting the viewer to follow the balloon's journey into the high-altitude air.",
+        "negative_prompt": ""
+    },
+    {
+        "short_description": "On the left of the table, plates are displayed, but no forks are present.",
+        "positive_prompt": "On the left side of the table, plates are displayed in an arrangement.",
+        "negative_prompt": "forks"
+    },
+    {
+        "short_description": "A red zebra stands still, not running, beside a calm lake on the far side of a hill.",
+        "positive_prompt": "A red zebra stands still beside a calm lake on the far side of a hill. The tranquil water reflects the unique coloration of the zebra, and the landscape rolls gently up the hill behind them, creating a peaceful and picturesque scene.",
+        "negative_prompt": "running"
+    },
+    {
+        "short_description": "A metallic blue sphere is on top of a box, with none on the left side.",
+        "positive_prompt": "A metallic blue sphere is shining as it rests elegantly on top of a box, catching the light and displaying vivid blue reflections across its smooth, polished surface. The box beneath it provides a solid, structured base, and the arrangement creates a striking visual contrast between the sphere's reflective metallic finish and the box's distinct form.",
+        "negative_prompt": "sphere on the left side"
+    },
+    {
+        "short_description": "A person without glasses, near a bookshelf, is not reading a book.",
+        "positive_prompt": "A person without glasses stands near a bookshelf, surrounded by rows of neatly arranged books, in a quiet, thoughtfully decorated room.",
+        "negative_prompt": "reading a book"
+    },
+    {
+        "short_description": "A person without a hat pays a person with a hat on the side of the street.",
+        "positive_prompt": "A person pays another person who is wearing a hat on the side of the street. The street is bustling, and the interaction takes place near a curb, with the person giving money reaching out to the one sporting a distinctive hat, while people pass by in the background.",
+        "negative_prompt": "person without a hat"
+    },
+    {
+        "short_description": "The fork is next to the steak, but it does not pierce it.",
+        "positive_prompt": "The fork is positioned next to the steak, both resting on a plate. The steak is cooked to perfection, with a slightly crispy edge and juicy center. The fork is made of polished stainless steel, gleaming under the warm light. The plate sits on a linen tablecloth, adding an elegant touch to the dining scene.",
+        "negative_prompt": "fork piercing steak"
+    },
+    {
+        "short_description": "A book is on the top, and the laptop is not displaying a beautiful scenery.",
+        "positive_prompt": "A book is placed on the top, and the laptop is present.",
+        "negative_prompt": "beautiful scenery"
+    },
+    {
+        "short_description": "The vase, on the side of the table, contains no red flowers.",
+        "positive_prompt": "The vase, placed elegantly on the side of the table, is filled with beautiful flowers. The arrangement showcases the flowers' delicate petals and varied hues, highlighting the finesse of the decorator and complementing the tranquil atmosphere of its surroundings.",
+        "negative_prompt": "red flowers"
+    },
+    {
+        "short_description": "The bird, on the side of the mountain, does not fly higher than the mountain's peak.",
+        "positive_prompt": "The bird is positioned on the side of the mountain, perched gracefully amid the rugged terrain. The mountain looms majestically in the background, its peak towering high above the landscape, while the bird remains on the slopes, surrounded by rocky outcrops and sparse alpine vegetation. The expansive sky and distant valleys create a sense of serene elevation and natural beauty.",
+        "negative_prompt": "bird flying above mountain peak"
+    },
+    {
+        "short_description": "On the bottom, there are cars and people, but no bicycles are present in the scene.",
+        "positive_prompt": "On the bottom, there are cars and people, creating a bustling scene full of activity and motion.",
+        "negative_prompt": "bicycles"
+    },
+    {
+        "short_description": "A harp with no strings sits on the side of a serene pond, reflecting the quiet scene.",
+        "positive_prompt": "A harp sits on the side of a serene pond, reflecting the quiet scene. The surface of the pond is calm and still, mirroring the elegant form of the harp. The surrounding area exudes tranquility, with soft natural light illuminating the scene and lush greenery bordering the water's edge. The atmosphere is peaceful, emphasizing the gentle beauty of the landscape and the solitary presence of the harp.",
+        "negative_prompt": "strings"
+    },
+    {
+        "short_description": "On the top shelf, a vase sits quietly on the bookshelf with no books.",
+        "positive_prompt": "On the top shelf, a vase sits quietly on the bookshelf.",
+        "negative_prompt": "books"
+    },
+    {
+        "short_description": "A group of children sits quietly next to a playground, where the children are not playing.",
+        "positive_prompt": "A group of children sits quietly next to a playground, with their attention focused on something nearby. The playground equipment stands invitingly in the background, bathed in gentle sunlight, but the children remain seated in a small, close-knit group on the soft grass. They appear calm and thoughtful, their expressions serene as they interact in hushed voices or simply observe their surroundings.",
+        "negative_prompt": "playing"
+    },
+    {
+        "short_description": "The beach, with no people or shells, stretches along the side of the tranquil ocean.",
+        "positive_prompt": "The beach stretches along the side of the tranquil ocean, with gentle waves lapping against the soft sand, the coastline fading into the distance beneath a wide, open sky. The sunlight reflects off the calm water, casting shimmering patterns on the shore, and the rhythmic sound of the surf creates a serene and peaceful atmosphere.",
+        "negative_prompt": "people, shells"
+    },
+    {
+        "short_description": "The towel, near the bag, is lying on the ground, but it is not in the bag.",
+        "positive_prompt": "A towel is lying on the ground near a bag, with the two items positioned closely together.",
+        "negative_prompt": "towel inside the bag"
+    },
+    {
+        "short_description": "On the left, hands not wearing gloves are visible, with tools lying beside them.",
+        "positive_prompt": "On the left side of the scene, hands are visible, and an assortment of tools is lying beside them. The light is soft, highlighting the skin tones of the hands and the details of the tools arranged nearby.",
+        "negative_prompt": "gloves"
+    },
+    {
+        "short_description": "Next to the bare bushes, there are no flowers blooming in the garden.",
+        "positive_prompt": "Next to the bare bushes, the garden stretches out with rich soil and intricate textures, creating a tranquil and peaceful setting full of natural detail.",
+        "negative_prompt": "flowers"
+    },
+    {
+        "short_description": "The knife is near the side of the plate but is not in contact with the bread.",
+        "positive_prompt": "The knife is placed near the side of the plate, positioned to one side with clear space between it and the plate. The plate itself holds a piece of bread, and the knife is carefully arranged for easy access. The scene is well-lit, and the surfaces are clean and inviting, suggesting a neatly set table prepared for a meal.",
+        "negative_prompt": "knife touching bread"
+    },
+    {
+        "short_description": "At the top of the sky, there are stars and clouds, but no moon is in sight.",
+        "positive_prompt": "At the top of the sky, there are sparkling stars scattered across the expanse, mingling with soft, billowing clouds drifting gently.",
+        "negative_prompt": "moon"
+    }
+]

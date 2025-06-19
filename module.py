@@ -4,9 +4,9 @@ from torch.distributions.categorical import Categorical
 class Module(torch.nn.Module):
     def __init__(self, head=8):
         super().__init__()
-        self.latent_proj = torch.nn.Linear(1536, 512)
-        self.prompt_proj = torch.nn.Linear(1536, 512) 
-        self.head = head 
+        self.latent_proj = torch.nn.Linear(2432, 256)
+        self.prompt_proj = torch.nn.Linear(2432, 256) 
+        self.head = head
         self.conv = torch.nn.Sequential(
             torch.nn.Conv2d(head * 2, 128, kernel_size=3), #why we need padding? alignment?
             torch.nn.ReLU(),
@@ -14,15 +14,15 @@ class Module(torch.nn.Module):
             torch.nn.ReLU(),
             torch.nn.Conv2d(64, 32, kernel_size=3),
             torch.nn.ReLU(),
-            torch.nn.Conv2d(32, 20, kernel_size=3),
+            torch.nn.Conv2d(32, 40, kernel_size=3),
         )
         self.time_emb = torch.nn.Embedding(50, head)
-        self.options = torch.arange(0, 4, 0.2).cuda()
+        self.options = torch.arange(0, 8, 0.2).cuda()
     
-    def map(self, tensor, t=3):
+    def map(self, tensor):
         # tensor [BATCH, options, 32, 32]
         tensor = tensor.permute(0, 2, 3, 1)  # [BATCH, 32, 32, options]
-        sampler = Categorical(logits=tensor/t) 
+        sampler = Categorical(logits=tensor) 
         indices = sampler.sample()
         values = self.options[indices]
         values_upsampled = torch.nn.functional.interpolate(
@@ -38,8 +38,8 @@ class Module(torch.nn.Module):
         batch_size = latent.shape[0]
         latent = self.latent_proj(latent)
         prompt = self.prompt_proj(prompt)
-        latent = latent.view(batch_size, -1, self.head, 512 // self.head)
-        prompt = prompt.view(batch_size, -1, self.head, 512 // self.head)
+        latent = latent.view(batch_size, -1, self.head, 256 // self.head)
+        prompt = prompt.view(batch_size, -1, self.head, 256 // self.head)
         assert latent.shape[-2:] == prompt.shape[-2:]
         attention = torch.einsum("blhd,bnhd->bhln", latent, prompt).mean(-1) 
         time_embed = self.time_emb(torch.tensor(step).cuda()).view(batch_size, self.head, 1, 1).repeat(1, 1, 32, 32)
