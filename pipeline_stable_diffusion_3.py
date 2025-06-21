@@ -1094,7 +1094,7 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
                 )[0]
 
                 neg_map = torch.stack([block.attn.processor.attn_weight for block in self.transformer.transformer_blocks])
-                weight_map = neg_map.mean((1,3)).reshape(-1, width//16, height//16)
+                weight_map = neg_map.mean((1,2,3)).reshape(-1, width//16, height//16)
                 for block in self.transformer.transformer_blocks:
                     block.attn.processor.attn_weight = None 
                 self.neg_maps.append(weight_map)
