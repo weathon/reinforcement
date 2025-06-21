@@ -4,8 +4,8 @@ from torch.distributions.categorical import Categorical
 class Module(torch.nn.Module):
     def __init__(self, head=8):
         super().__init__()
-        self.latent_proj = torch.nn.Linear(2432, 256)
-        self.prompt_proj = torch.nn.Linear(2432, 256) 
+        self.latent_proj = torch.nn.Linear(2432, 512)
+        self.prompt_proj = torch.nn.Linear(2432, 512) 
         self.head = head
         self.conv = torch.nn.Sequential(
             torch.nn.Conv2d(head * 2, 128, kernel_size=3), #why we need padding? alignment?
@@ -38,8 +38,8 @@ class Module(torch.nn.Module):
         batch_size = latent.shape[0]
         latent = self.latent_proj(latent)
         prompt = self.prompt_proj(prompt)
-        latent = latent.view(batch_size, -1, self.head, 256 // self.head)
-        prompt = prompt.view(batch_size, -1, self.head, 256 // self.head)
+        latent = latent.view(batch_size, -1, self.head, 512 // self.head)
+        prompt = prompt.view(batch_size, -1, self.head, 512 // self.head)
         assert latent.shape[-2:] == prompt.shape[-2:]
         attention = torch.einsum("blhd,bnhd->bhln", latent, prompt).mean(-1) 
         time_embed = self.time_emb(torch.tensor(step).cuda()).view(batch_size, self.head, 1, 1).repeat(1, 1, 32, 32)

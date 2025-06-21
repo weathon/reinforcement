@@ -57,7 +57,7 @@ for epoch in range(500):
             width=512,
             height=512,
             num_inference_steps=16,
-            guidance_scale=4,
+            guidance_scale=6,
             module=module,
             generator=torch.manual_seed(seed)
         ).images[0]
@@ -105,7 +105,7 @@ for epoch in range(500):
             width=512,
             height=512,
             num_inference_steps=16,
-            guidance_scale=4,
+            guidance_scale=6,
             module=module, 
             temp=0.01,
             generator=torch.manual_seed(1989)
