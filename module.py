@@ -5,7 +5,7 @@ class Module(torch.nn.Module):
     def __init__(self):
         super().__init__()
         self.conv = torch.nn.Sequential(
-            torch.nn.Conv2d(1445, 128, kernel_size=3),
+            torch.nn.Conv2d(39, 128, kernel_size=3),
             torch.nn.ReLU(),
             torch.nn.Conv2d(128, 64, kernel_size=3),
             torch.nn.ReLU(),
