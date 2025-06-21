@@ -32,3 +32,6 @@ for idx in tqdm.tqdm(range(len(prompts.positive_prompts))):
         guidance_scale=4,
     ).images[0]
     score = eval(image1, prompt, negative_prompt)
+    scores.append(score)
+    
+print("mean score", np.mean(scores))

@@ -1,6 +1,7 @@
 import torch
 from pipeline_stable_diffusion_3 import StableDiffusion3Pipeline
 from transformer_sd3 import SD3Transformer2DModel
+from sd_processor import JointAttnProcessor2_0
 from module import Module
 import prompts
 from judge import eval 
@@ -16,23 +17,23 @@ pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3.
 pipe.transformer = transformer
 pipe = pipe.to("cuda")
 pipe.set_progress_bar_config(disable=True)
-
-def compute_loss(module, intermediate_latents, intermediate_prompt_embeds, pred, reward):
+for block in pipe.transformer.transformer_blocks:
+    block.attn.processor = JointAttnProcessor2_0()
+def compute_loss(module, negmaps, pred, reward):
     loss = 0
     entropy = 0
     p = 0
-    for i in range(len(intermediate_latents)):
-        latents = intermediate_latents[i].cuda().float().unsqueeze(0)
-        prompt_embeds = intermediate_prompt_embeds[i].cuda().float().unsqueeze(0)
-        logistic = module(latents, prompt_embeds, i)
+    for i in range(len(negmaps)):
+        negmap = negmaps[i].cuda().float()
+        logistic = module(negmap, i)
         prob = torch.softmax(logistic, dim=1)
         p += torch.gather(prob, 1, pred[i].cuda().long().unsqueeze(1)).squeeze(1).mean()
         # p += torch.max(prob, dim=1).values.mean()
         entropy += -torch.sum(prob * torch.log(prob + 1e-10), dim=1).mean()
         loss += torch.nn.functional.cross_entropy(logistic, pred[i].cuda().long(), reduction='mean', label_smoothing=0.01 if reward > 0 else 0.0)
-    loss = loss / len(intermediate_latents)
-    entropy = entropy / len(intermediate_latents)
-    return loss * reward, entropy * 0, p / len(intermediate_latents)
+    loss = loss / len(negmaps)
+    entropy = entropy / len(negmaps)
+    return loss * reward, entropy * 0, p / len(negmaps)
 
 module = Module().cuda()
 optimizer = torch.optim.AdamW(module.parameters(), lr=1e-4, weight_decay=1e-3)
@@ -47,10 +48,21 @@ baseline = None
 
 for epoch in range(500):
     for idx in tqdm.tqdm(range(len(prompts.positive_prompts))):
+    
         seed = idx + epoch * len(prompts.positive_prompts)
         prompt = prompts.positive_prompts[idx]
         negative_prompt = prompts.negative_prompts[idx]
         
+        for block in pipe.transformer.transformer_blocks:
+            block.attn.processor.neg_prompt_len=max([
+                len(pipe.tokenizer.tokenize(negative_prompt)), 
+            ])
+
+        for block in pipe.transformer.transformer_blocks:
+            block.attn.processor.neg_prompt_len_3=max([
+                len(pipe.tokenizer_3.tokenize(negative_prompt)), 
+            ])
+            
         image1 = pipe(
             prompt,
             negative_prompt=negative_prompt,
@@ -63,13 +75,12 @@ for epoch in range(500):
         ).images[0]
 
         import copy 
-        intermediate_latents1 = [i.clone() for i in pipe.intermediate_latents]
-        intermediate_prompt_embeds1 = [i.clone() for i in pipe.intermediate_prompt_embeds]
+        negmaps = [i.clone() for i in pipe.neg_maps]
         pred1 = [i.clone() for i in pipe.pred]
 
         score = eval(image1, prompt, negative_prompt)
         
-        loss, entropy, p = compute_loss(module, intermediate_latents1, intermediate_prompt_embeds1, pred1, score - baseline if baseline is not None else 0)
+        loss, entropy, p = compute_loss(module, negmaps, pred1, score - baseline if baseline is not None else 0)
         (loss - entropy).backward()
         # loss.backward()
         if baseline is None:

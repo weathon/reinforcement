@@ -1002,7 +1002,7 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
             width,
             prompt_embeds.dtype,
             device, 
-            generator,
+            generator, 
             latents,
         )
 
@@ -1073,6 +1073,7 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
         )
             
         # 7. Denoising loop
+        self.neg_maps = []
         with self.progress_bar(total=num_inference_steps) as progress_bar:
             for i, t in enumerate(timesteps):
                 if self.interrupt:
@@ -1092,10 +1093,13 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
                     return_dict=False, 
                 )[0]
 
-                
+                neg_map = torch.stack([block.attn.processor.attn_weight for block in self.transformer.transformer_blocks])
+                weight_map = neg_map.mean((1,3)).reshape(-1, width//16, height//16)
+                for block in self.transformer.transformer_blocks:
+                    block.attn.processor.attn_weight = None 
+                self.neg_maps.append(weight_map)
                 if module is not None:
-                    scale = module(self.transformer.last_hidden_state.float()[:1],
-                                   self.transformer.last_pooled_embedding.float()[:1], i)
+                    scale = module(weight_map, i)
                     values_upsampled, values = module.map(scale)
                     self.pred.append(values)
                     # noise_pred = noise_pred * valuesupsampled.to(latents.dtype) thought this gonna work, forget the base
